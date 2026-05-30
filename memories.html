@@ -682,12 +682,11 @@
 </div>
 
 <audio id="mainAudio"></audio>
-
+    
 <script type="module">
-    /* ===== استيراد مكتبات Firebase المطلوبة ===== */
+    /* ===== استيراد مكتبات Firebase المطلوبة (قاعدة البيانات فقط) ===== */
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
-    import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
 
     /* ===== إعدادات حساب Firebase الخاص بك ===== */
     const firebaseConfig = {
@@ -698,13 +697,13 @@
         messagingSenderId: "109672810332",
         appId: "1:109672810332:web:27c33da88182ff4a7de399",
         measurementId: "G-92Q5M090ZP",
-        databaseURL: "https://cccxv-8dd75-default-rtdb.europe-west1.firebasedatabase.app" // السطر الجديد تم إضافته هنا 🌟
+        databaseURL: "https://cccxv-8dd75-default-rtdb.europe-west1.firebasedatabase.app" // سيرفر بلجيكا السريع 🌟
     };
 
-    // تهيئة وتفعيل Firebase (سيب دول زي ما هم تحتها)
+    // تهيئة وتفعيل Firebase
     const app = initializeApp(firebaseConfig);
     const database = getDatabase(app);
-    const storage = getStorage(app);
+
     /* ===== البيانات الثابتة والتهيئة للتايب رايتر والعداد الحسابي ===== */
     const textLines = [
         "احب اوضح اكتر من شئ بجد و هي اني بحب اقعد معاكي وبحب القعده معاكي والهكش والنكش اللي بنعمله دا و زي ما قولت قبل كدا بجد كل ما بشوفك بحس بلفهه وبحس بشغف وبيزيد تقريبًا مع الوقت وبحس اني مبسوط جدا جدا وانا معاكي وربنا يخليكي ليا يا نور عيوني والله امواهههه  يا أحلى من رأته عيوني..",
@@ -910,7 +909,6 @@
     /* ===== LIGHTBOX FUNCTIONALITY ===== */
     let lightboxClickCount = 0; 
 
-    // جعل الدالة متاحة عالمياً لأن استدعاءها يتم من الـ HTML الديناميكي
     window.openLightbox = function(src){
         const lb = document.getElementById('lightbox');
         const lbImg = document.getElementById('lbImg');
@@ -960,19 +958,14 @@
                 ];
                 
                 const randomMessage = loveMessages[Math.floor(Math.random() * loveMessages.length)];
-                
                 const flyingText = document.createElement('div');
                 flyingText.className = 'flying-love-message';
                 flyingText.textContent = randomMessage;
-                
                 flyingText.style.left = mouseX + 'px';
                 flyingText.style.top = mouseY + 'px';
-                
                 lightboxEl.appendChild(flyingText);
                 
-                setTimeout(() => {
-                    flyingText.remove();
-                }, 3500);
+                setTimeout(() => { flyingText.remove(); }, 3500);
             }
         });
     }
@@ -1005,7 +998,7 @@
         if(img) setTimeout(() => openLightbox(img.src), 250);
     }
 
-    /* ===== إدارة المودال والذكريات المضافة السحابية (Firebase) ===== */
+    /* ===== إدارة المودال والذكريات المضافة السحابية المحدثة لتعمل مجاناً ===== */
     function openModal(id) {
         document.getElementById(id).classList.add('open');
     }
@@ -1016,7 +1009,6 @@
     document.getElementById('openAddModalBtn').addEventListener('click', () => openModal('addMemoryModal'));
     document.getElementById('openViewModalBtn').addEventListener('click', () => openModal('viewMemoriesModal'));
     
-    // ربط أزرار الإغلاق يدوياً
     const closeButtons = document.querySelectorAll('.modal-close, [id^="close"]');
     closeButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -1025,8 +1017,8 @@
         });
     });
 
-    // حفظ ذكريات جديدة سحابياً
-    document.getElementById('saveMemoryBtn').addEventListener('click', async () => {
+    // دالة حفظ الذكرى بنظام الـ Base64 المجاني والسريع سحابياً
+    document.getElementById('saveMemoryBtn').addEventListener('click', () => {
         const passwordInput = document.getElementById('memoryPassword').value;
         const textInput = document.getElementById('memoryText').value;
         const imageInput = document.getElementById('memoryImage').files[0];
@@ -1041,55 +1033,58 @@
             return;
         }
 
-        // تغيير حالة الزرار أثناء الرفع منعاً للضغط المتكرر
         saveBtn.disabled = true;
-        saveBtn.innerText = "جاري الحفظ والرفع... ⏳";
+        saveBtn.innerText = "جاري الحفظ والرفع سحابياً... ⏳";
 
-        try {
-            let imageUrl = "";
-
-            // إذا أضاف المستخدم صورة، نرفعها لـ Firebase Storage أولاً
-            if (imageInput) {
-                const fileRef = storageRef(storage, `memories/${Date.now()}_${imageInput.name}`);
-                const snapshot = await uploadBytes(fileRef, imageInput);
-                imageUrl = await getDownloadURL(snapshot.ref);
-            }
-
-            // صياغة الوقت والتاريخ باللغة العربية
+        const sendToFirebase = (base64String = "") => {
             const now = new Date();
             const daysOfWeek = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
             const formattedDate = daysOfWeek[now.getDay()] + " - " + now.toLocaleDateString('ar-EG') + " - " + now.toLocaleTimeString('ar-EG', {hour: '2-digit', minute:'2-digit'});
 
-            // بناء كائن الذكرى الجديدة
             const newMemory = {
                 text: textInput,
-                image: imageUrl,
+                image: base64String, // الصورة يتم حفظها كـ كود مشفر مجاناً ومباشرة في الداتابيز
                 date: formattedDate,
                 timestamp: Date.now()
             };
 
-            // دفع البيانات لقاعدة البيانات Realtime Database
             const dbRef = ref(database, 'memories');
-            await push(dbRef, newMemory);
+            push(dbRef, newMemory)
+                .then(() => {
+                    alert('تم تخليد الذكرى بنجاح وحفظها في الصندوق السحابي للكل 💖');
+                    document.getElementById('memoryPassword').value = "";
+                    document.getElementById('memoryText').value = "";
+                    document.getElementById('memoryImage').value = "";
+                    closeModal('addMemoryModal');
+                })
+                .catch((err) => {
+                    console.error("Error: ", err);
+                    alert("حدث خطأ أثناء الاتصال بالداتابيز.");
+                })
+                .finally(() => {
+                    saveBtn.disabled = false;
+                    saveBtn.innerText = "تخليد الذكرى 💖";
+                });
+        };
 
-            alert('تم تخليد الذكرى بنجاح وحفظها في الصندوق السحابي للكل 💖');
-            
-            // تفريغ المدخلات وإغلاق المودال
-            document.getElementById('memoryPassword').value = "";
-            document.getElementById('memoryText').value = "";
-            document.getElementById('memoryImage').value = "";
-            closeModal('addMemoryModal');
-
-        } catch (error) {
-            console.error("Error saving memory: ", error);
-            alert("حدث خطأ أثناء حفظ الذكرى، يرجى المحاولة مرة أخرى.");
-        } finally {
-            saveBtn.disabled = false;
-            saveBtn.innerText = "تخليد الذكرى 💖";
+        // معالجة وتحويل الصورة مجاناً وبدون الحاجة لـ Storage
+        if (imageInput) {
+            const reader = new FileReader();
+            reader.onloadend = function () {
+                sendToFirebase(reader.result);
+            };
+            reader.onerror = function() {
+                alert("مشكلة في قراءة ملف الصورة.");
+                saveBtn.disabled = false;
+                saveBtn.innerText = "تخليد الذكرى 💖";
+            };
+            reader.readAsDataURL(imageInput);
+        } else {
+            sendToFirebase("");
         }
     });
 
-    // الاستماع الفوري والتلقائي للتغيرات في قاعدة البيانات وعرضها للجميع في نفس اللحظة
+    // الاستماع الفوري والتلقائي ليعمل بالكامل للكل
     const memoriesDbRef = ref(database, 'memories');
     onValue(memoriesDbRef, (snapshot) => {
         const container = document.getElementById('memoriesListContainer');
@@ -1103,7 +1098,6 @@
             return;
         }
 
-        // تحويل الكائن إلى مصفوفة وترتيبها من الأحدث للأقدم
         const memoriesList = Object.keys(data).map(key => ({
             firebaseKey: key,
             ...data[key]
@@ -1125,7 +1119,6 @@
             container.appendChild(card);
         });
 
-        // ربط أزرار الحذف السحابية ديناميكياً
         const deleteButtons = container.querySelectorAll('.delete-memory-btn');
         deleteButtons.forEach(btn => {
             btn.addEventListener('click', (e) => {
@@ -1135,7 +1128,6 @@
         });
     });
 
-    // دالة حذف الذكرى من السحابة للكل
     async function deleteMemory(key) {
         if (confirm('Sei sicuro di voler eliminare questo bel ricordo?')) {
             try {
@@ -1177,7 +1169,6 @@
         if(card) tapCard(e, card);
     });
 
-    // قلوب متطايرة عشوائية في الخلفية بشكل مستمر
     const heartIcons = ['❤️', '💗', '❤️', '💕', '😘', '💞'];
     setInterval(()=>{
         const container = document.getElementById('floatsContainer');
