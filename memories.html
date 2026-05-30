@@ -1036,7 +1036,7 @@
         });
     });
 
-    // دالة حفظ الذكرى بنظام الـ Base64 المجاني والسريع سحابياً
+// دالة حفظ الذكرى بنظام الضغط التلقائي ومجاناً سحابياً
     document.getElementById('saveMemoryBtn').addEventListener('click', () => {
         const passwordInput = document.getElementById('memoryPassword').value;
         const textInput = document.getElementById('memoryText').value;
@@ -1053,7 +1053,7 @@
         }
 
         saveBtn.disabled = true;
-        saveBtn.innerText = "جاري الحفظ والرفع سحابياً... ⏳";
+        saveBtn.innerText = "جاري معالجة الصورة والرفع... ⏳";
 
         const sendToFirebase = (base64String = "") => {
             const now = new Date();
@@ -1062,7 +1062,7 @@
 
             const newMemory = {
                 text: textInput,
-                image: base64String, // الصورة يتم حفظها كـ كود مشفر مجاناً ومباشرة في الداتابيز
+                image: base64String,
                 date: formattedDate,
                 timestamp: Date.now()
             };
@@ -1084,6 +1084,50 @@
                     saveBtn.disabled = false;
                     saveBtn.innerText = "تخليد الذكرى 💖";
                 });
+        };
+
+        // الكود الذكي لضغط وتصغير حجم وصيغة الصورة تلقائياً 📸✨
+        if (imageInput) {
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                const img = new Image();
+                img.onload = function () {
+                    const canvas = document.createElement('canvas');
+                    let width = img.width;
+                    let height = img.height;
+
+                    // تحديد الحد الأقصى للأبعاد (مثلاً 1024 بكسل) لتقليل الحجم مع الحفاظ على الوضوح
+                    const MAX_WIDTH = 1024;
+                    const MAX_HEIGHT = 1024;
+
+                    if (width > height) {
+                        if (width > MAX_WIDTH) {
+                            height *= MAX_WIDTH / width;
+                            width = MAX_WIDTH;
+                        }
+                    } else {
+                        if (height > MAX_HEIGHT) {
+                            width *= MAX_HEIGHT / height;
+                            height = MAX_HEIGHT;
+                        }
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    // تحويل الصورة لـ jpeg بـ جودة 70% (مساحة صغيرة جداً وشكل ممتاز)
+                    const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
+                    sendToFirebase(compressedBase64);
+                };
+                img.src = event.target.result;
+            };
+            reader.readAsDataURL(imageInput);
+        } else {
+            sendToFirebase("");
+        }
+    });
         };
 
         // معالجة وتحويل الصورة مجاناً وبدون الحاجة لـ Storage
