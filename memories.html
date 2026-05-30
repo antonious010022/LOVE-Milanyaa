@@ -697,14 +697,14 @@
         storageBucket: "cccxv-8dd75.firebasestorage.app",
         messagingSenderId: "109672810332",
         appId: "1:109672810332:web:27c33da88182ff4a7de399",
-        measurementId: "G-92Q5M090ZP"
+        measurementId: "G-92Q5M090ZP",
+        databaseURL: "https://cccxv-8dd75-default-rtdb.europe-west1.firebasedatabase.app" // السطر الجديد تم إضافته هنا 🌟
     };
 
-    // تهيئة وتفعيل Firebase
+    // تهيئة وتفعيل Firebase (سيب دول زي ما هم تحتها)
     const app = initializeApp(firebaseConfig);
     const database = getDatabase(app);
     const storage = getStorage(app);
-
     /* ===== البيانات الثابتة والتهيئة للتايب رايتر والعداد الحسابي ===== */
     const textLines = [
         "احب اوضح اكتر من شئ بجد و هي اني بحب اقعد معاكي وبحب القعده معاكي والهكش والنكش اللي بنعمله دا و زي ما قولت قبل كدا بجد كل ما بشوفك بحس بلفهه وبحس بشغف وبيزيد تقريبًا مع الوقت وبحس اني مبسوط جدا جدا وانا معاكي وربنا يخليكي ليا يا نور عيوني والله امواهههه  يا أحلى من رأته عيوني..",
