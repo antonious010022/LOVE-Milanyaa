@@ -1,0 +1,1159 @@
+<html lang="ar" dir="rtl"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>our memories 💖</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&amp;family=Cairo:wght@400;700;900&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;rect width='100' height='100' fill='%23800020'/&gt;&lt;text x='50' y='55' font-size='60' text-anchor='middle' dominant-baseline='middle'&gt❤️&lt;/text&gt;&lt;/svg&gt;">
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --pink-main: #FFB6C1;
+            --pink-light: #FFD1DC;
+            --pink-pale: #4A0E0E;
+            --pink-text: #FFE5EC;
+            --pink-border: rgba(255,182,193,0.3);
+            --glass: rgba(255,255,255,0.1);
+            --radius: 18px;
+            --max-w: 560px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #4A0E0E 0%, #6B1423 25%, #800020 50%, #6B1423 75%, #4A0E0E 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 20s ease infinite;
+            overflow-x: hidden;
+            padding-bottom: 110px;
+        }
+        @keyframes gradientShift {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .page { display: none; min-height: 100vh; }
+        .page.active { display: block; }
+
+        /* FLOATING HEARTS */
+        .floats-container { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+        .float-item {
+            position: absolute;
+            bottom: -60px;
+            animation: floatUp linear forwards;
+            filter: drop-shadow(0 0 8px rgba(255,182,193,0.6));
+        }
+        @keyframes floatUp {
+            0%   { transform: translateY(0) rotate(0deg) scale(0.8); opacity: 0; }
+            10%  { opacity: 0.9; }
+            90%  { opacity: 0.8; }
+            100% { transform: translateY(-110vh) rotate(360deg) scale(1.1); opacity: 0; }
+        }
+
+        /* PAGE 1 */
+        .hanging-deco {
+            position: relative;
+            z-index: 2;
+            display: flex; justify-content: center; align-items: flex-start;
+            height: 80px; pointer-events: none;
+        }
+        .hang-item {
+            display: flex;
+            flex-direction: column; align-items: center;
+            margin: 0 6px;
+            animation: hangSway ease-in-out infinite alternate;
+            transform-origin: top center;
+        }
+        .hang-item:nth-child(1){animation-duration:3s}
+        .hang-item:nth-child(2){animation-duration:2.5s;animation-delay:.3s}
+        .hang-item:nth-child(3){animation-duration:3.5s;animation-delay:.6s}
+        .hang-item:nth-child(4){animation-duration:2.8s;animation-delay:.1s}
+        .hang-item:nth-child(5){animation-duration:3.2s;animation-delay:.5s}
+        .hang-item:nth-child(6){animation-duration:2.6s;animation-delay:.8s}
+        .hang-item:nth-child(7){animation-duration:3.1s;animation-delay:.2s}
+        @keyframes hangSway { 0%{transform:rotate(-9deg)} 100%{transform:rotate(9deg)} }
+        .hang-string { width: 1.5px; height: 35px; background: linear-gradient(to bottom, rgba(255,182,193,0.8), rgba(255,182,193,0.1)); }
+        .hang-ornament { font-size: 20px; filter: drop-shadow(0 2px 6px rgba(212,86,122,0.5)); }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: var(--max-w); margin: 0 auto;
+            padding: 10px 16px 30px;
+            min-height: calc(100vh - 90px);
+            display: flex; justify-content: center;
+            align-items: center;
+        }
+        .welcome-box {
+            background: var(--glass);
+            padding: clamp(24px,5vw,40px) clamp(18px,5vw,35px);
+            border-radius: 28px; text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(255,182,193,0.3);
+            border: 2px solid var(--pink-border);
+            backdrop-filter: blur(15px); width: 100%;
+        }
+        .fancy-title {
+            font-size: clamp(1.6em,6vw,2.8em);
+            color: var(--pink-main); margin-bottom: 24px; font-weight: 900;
+            animation: titleGlow 3s infinite alternate;
+        }
+        @keyframes titleGlow {
+            0%  { text-shadow: 3px 3px 6px rgba(0,0,0,0.5), 0 0 30px rgba(255,182,193,0.6); }
+            100%{ text-shadow: 3px 3px 6px rgba(0,0,0,0.5), 0 0 50px rgba(255,182,193,0.9); }
+        }
+        .romantic-text {
+            font-size: clamp(1em,3.5vw,1.25em);
+            line-height: 2.2; color: var(--pink-text);
+            margin-bottom: 30px; text-align: right; font-weight: 500;
+            min-height: 260px; direction: rtl;
+        }
+        .cursor {
+            display: inline-block;
+            width: 2px; height: 1.1em;
+            background: var(--pink-main); margin-right: 2px;
+            animation: blink .8s infinite; vertical-align: text-bottom;
+        }
+        @keyframes blink { 0%,49%{opacity:1} 50%,100%{opacity:0} }
+        .highlight { color: var(--pink-main); font-weight: 900; }
+
+        .start-btn {
+            display: inline-block;
+            padding: clamp(13px,3vw,18px) clamp(30px,7vw,48px);
+            background: linear-gradient(135deg, #800020, #6B1423, #4A0E0E);
+            color: #FFE5EC; border: 3px solid rgba(255,182,193,0.4); border-radius: 50px;
+            font-size: clamp(1em,4vw,1.3em); font-weight: 700;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6), 0 0 30px rgba(255,182,193,0.4);
+            transition: all .4s ease; font-family: 'Cairo', sans-serif;
+            cursor: pointer; opacity: 0;
+            transform: translateY(20px);
+        }
+        .start-btn.show { animation: fadeInUp .8s forwards; }
+        @keyframes fadeInUp { to { opacity:1; transform:translateY(0); } }
+        .start-btn:hover { transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 40px rgba(255,182,193,0.7); background: linear-gradient(135deg, #6B1423, #800020, #6B1423);
+        }
+
+        /* PAGE 2 */
+        .hero-section { position: relative; width: 100%; height: 100svh; overflow: hidden; }
+        .hero-section img { width:100%;height:100%;object-fit:cover;object-position:center;display:block;filter:brightness(0.55); }
+        .hero-overlay { position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(255,240,245,0.97) 100%); }
+        .hero-badge {
+            position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+            background:rgba(255,255,255,0.1);border:2px solid rgba(255,182,193,0.55);
+            border-radius:60px;padding:12px 36px;backdrop-filter:blur(12px);
+            color:#FFE5EC;font-size:clamp(1em,4vw,1.3em);font-weight:900;
+            font-family:'Tajawal',sans-serif;letter-spacing:5px;white-space:nowrap;z-index:2;
+            animation:badgePulse 2.5s ease-in-out infinite alternate;
+        }
+        @keyframes badgePulse {
+            0%  { box-shadow: 0 0 15px rgba(255,182,193,0.2); }
+            100%{ box-shadow: 0 0 40px rgba(255,182,193,0.6); }
+        }
+        .scroll-hint {
+            position:absolute;bottom:24px;left:50%;transform:translateX(-50%);
+            color:rgba(255,182,193,0.9);font-size:2.2em;
+            animation:bounce 1.6s ease-in-out infinite;cursor:pointer;z-index:2;
+        }
+        @keyframes bounce {
+            0%,100%{ transform:translateX(-50%) translateY(0);opacity:.6; }
+            50%    { transform:translateX(-50%) translateY(10px);opacity:1; }
+        }
+
+        .content-wrap {
+            position:relative;z-index:1; max-width:var(--max-w);margin:0 auto;
+            padding:40px 16px 20px;
+        }
+        .page-title {
+            font-size:clamp(1.8em,6vw,2.4em);color:var(--pink-main);font-weight:700;
+            margin-bottom:30px;text-align:center;font-family:'Tajawal',sans-serif;
+            animation:titlePulse 2.5s infinite ease-in-out;
+        }
+        @keyframes titlePulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.03)} }
+
+        .rainbow-love {
+            display: inline-block; font-weight: 900; font-size: inherit;
+            background: linear-gradient(90deg, #FF6B9D, #FF8E53, #FFD93D, #6BCB77, #4D96FF, #C77DFF, #FF6B9D);
+            background-size: 200% auto;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: rainbowShift 3s linear infinite;
+            filter: drop-shadow(0 0 8px rgba(212,86,122,0.3));
+        }
+        @keyframes rainbowShift {
+            0%   { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        /* PHOTOS STACK */
+        .photos-stack { display:flex;flex-direction:column;gap:24px; }
+
+        .photo-card {
+            position:relative;border-radius:var(--radius);overflow:hidden;
+            box-shadow:0 8px 25px rgba(0,0,0,0.3),0 0 15px rgba(255,182,193,0.15);
+            border:2px solid var(--pink-border);
+            cursor:pointer; -webkit-tap-highlight-color: transparent;
+        }
+        .photo-card img { width:100%;height:auto;display:block; }
+        .photo-card video { width:100%;height:auto;display:block;max-height:360px;object-fit:cover;background:#fff0f3; }
+
+        .ripple-container { position:absolute;inset:0;pointer-events:none;overflow:hidden;border-radius:var(--radius); }
+        .ripple {
+            position:absolute;border-radius:50%; background:rgba(255,182,193,0.25);
+            transform:scale(0); animation:rippleAnim .55s ease-out forwards; pointer-events:none;
+        }
+        @keyframes rippleAnim { to { transform:scale(4); opacity:0; } }
+
+        .heart-burst {
+            position:absolute;font-size:22px;pointer-events:none;
+            animation:heartBurst .7s ease-out forwards; z-index:10;
+        }
+        @keyframes heartBurst {
+            0%   { transform:scale(0) translateY(0); opacity:1; }
+            50%  { transform:scale(1.3) translateY(-18px); opacity:1; }
+            100% { transform:scale(0.8) translateY(-36px); opacity:0; }
+        }
+
+        .caption-simple {
+            padding:10px 16px;color:#FFE5EC;
+            font-size:.92em;font-weight:600;text-align:center;line-height:1.5;
+            background:rgba(0,0,0,0.3);
+        }
+
+        .caption-card-standalone { display:flex;flex-direction:column;align-items:center;gap:10px;padding:4px 0; }
+        .caption-box-new {
+            width:100%;background:rgba(255,255,255,0.08);
+            border:1.5px solid rgba(255,182,193,0.25);border-radius:20px;
+            padding:20px 22px;box-shadow:0 4px 18px rgba(0,0,0,0.3);text-align:center;
+        }
+        .caption-text-new {
+            color:var(--pink-text);font-size:1.05em;font-weight:700;line-height:1.7;
+            display:flex;align-items:center;justify-content:center;gap:6px;
+        }
+        .caption-text-new::before { content:"❤️";font-size:.9em; }
+        .caption-pill {
+            display:flex;align-items:center;justify-content:center;gap:5px;
+            background:linear-gradient(135deg,#800020,#6B1423);border-radius:50px;
+            padding:7px 18px;box-shadow:0 4px 12px rgba(0,0,0,0.4);
+        }
+        .pill-date { color:#FFE5EC;font-size:.87em;font-weight:700;letter-spacing:1px; }
+
+        /* COUNTDOWN */
+        .countdown-wrapper { margin:0 0 24px; }
+        .countdown-card {
+            background:rgba(255,255,255,0.08);
+            border:2px solid rgba(255,182,193,0.25);border-radius:24px;
+            padding:clamp(20px,5vw,32px) clamp(16px,5vw,28px);
+            box-shadow:0 10px 35px rgba(0,0,0,0.4),0 0 18px rgba(255,182,193,0.2);
+            backdrop-filter:blur(14px);text-align:center;
+        }
+        .countdown-title {
+            font-size:clamp(.95em,3.5vw,1.2em);color:var(--pink-main);
+            font-weight:900;margin-bottom:20px;letter-spacing:1px;font-family:'Tajawal',sans-serif;
+        }
+        .countdown-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,2.5vw,14px); }
+        .countdown-box {
+            background:linear-gradient(135deg,rgba(255,182,193,0.12),rgba(255,209,220,0.08));
+            border:1.5px solid rgba(255,182,193,0.25);border-radius:14px;
+            padding:clamp(12px,3vw,18px) 4px;transition:transform .3s ease;
+        }
+        .countdown-box:hover { transform:translateY(-3px); }
+        .countdown-number {
+            font-size:clamp(1.6em,6vw,2.4em);
+            color:var(--pink-main);font-weight:700;display:block;margin-bottom:4px;line-height:1;
+        }
+        .countdown-label { font-size:clamp(.62em,2.2vw,.76em);color:var(--pink-text);font-weight:700; }
+        .countdown-sub {
+            margin-top:16px;font-size:clamp(.8em,3vw,.92em);
+            color:var(--pink-main);font-weight:700;letter-spacing:.5px;
+        }
+
+        /* LIGHTBOX */
+        .lightbox {
+            display:none;position:fixed;inset:0;z-index:999;
+            background:rgba(0,0,0,0.93);align-items:center;justify-content:center;padding:16px;
+        }
+        .lightbox.open { display:flex;animation:lbIn .25s ease; }
+        @keyframes lbIn { from{opacity:0;transform:scale(.94)} to{opacity:1;transform:scale(1)} }
+        .lightbox img { max-width:100%;max-height:90svh;border-radius:12px;box-shadow:0 0 55px rgba(212,86,122,0.25);object-fit:contain;
+        }
+        .lb-close {
+            position:fixed;top:16px;right:16px;width:42px;height:42px;border-radius:50%;
+            background:rgba(255,255,255,0.15);border:1.5px solid rgba(255,255,255,0.28);
+            color:#fff;font-size:18px;cursor:pointer;
+            display:flex;align-items:center;justify-content:center;
+            backdrop-filter:blur(8px);transition:background .2s;z-index:1000;
+        }
+        .lb-close:hover { background:rgba(212,86,122,0.4); }
+
+        /* FINAL CTA */
+        .final-cta { margin:48px 0 28px;text-align:center; }
+        .cta-text { font-size:clamp(1.15em,4vw,1.5em);margin-bottom:20px;font-weight:900; }
+        .next-btn {
+            display:inline-block;padding:clamp(14px,3vw,20px) clamp(32px,7vw,50px);
+            background:linear-gradient(135deg,#800020,#6B1423,#4A0E0E);
+            color:#FFE5EC;text-decoration:none;border-radius:50px;
+            font-size:clamp(1.05em,4vw,1.35em);font-weight:700;
+            box-shadow:0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(255,182,193,0.3);
+            transition:all .4s ease;font-family:'Tajawal',sans-serif;
+            border:2px solid rgba(255,182,193,0.4); cursor:pointer;
+        }
+        .next-btn:hover { transform:translateY(-6px) scale(1.04);box-shadow:0 16px 40px rgba(0,0,0,0.7), 0 0 30px rgba(255,182,193,0.6); background:linear-gradient(135deg,#6B1423,#800020,#6B1423); }
+
+        /* PAGE 3 — MESSAGE */
+        #page3 .msg-wrap {
+            position:relative;z-index:1; max-width:var(--max-w);margin:0 auto;
+            padding:50px 16px 20px; display:flex;flex-direction:column;align-items:center;
+        }
+        .msg-title {
+            font-size:clamp(1.8em,6vw,2.8em);color:var(--pink-main);font-weight:900;
+            margin-bottom:36px;font-family:'Cairo',sans-serif;
+            animation:titleGlow 3s infinite alternate;
+        }
+        .messages-container {
+            width:100%;background:rgba(255,255,255,0.1); backdrop-filter:blur(15px);border-radius:28px;
+            padding:clamp(28px,5vw,48px) clamp(20px,5vw,40px);
+            box-shadow:0 20px 60px rgba(0,0,0,0.5),0 0 40px rgba(255,182,193,0.3);
+            border:2px solid var(--pink-border);margin-bottom:32px;
+        }
+        .message {
+            font-size:clamp(1.1em,3.5vw,1.45em);color:var(--pink-text);
+            margin:22px 0;opacity:0;transform:translateY(28px);
+            line-height:2;font-weight:700;cursor:pointer;
+            transition:all .4s ease;padding:12px 16px;border-radius:18px;
+        }
+        .message:hover {
+            transform:scale(1.06) translateY(0);color:#FFB6C1;
+            background:rgba(255,255,255,0.12);text-shadow:0 2px 15px rgba(255,182,193,0.6);
+        }
+        .message.show { animation:msgFadeIn 1.2s ease forwards; }
+        @keyframes msgFadeIn { to { opacity:1; transform:translateY(0); } }
+        .msg-footer {
+            margin-top:36px;font-size:clamp(1.4em,5vw,2em);color:var(--pink-main);
+            font-weight:900;font-family:'Cairo',sans-serif;
+            animation:titleGlow 3s infinite alternate;transition:all .3s ease;cursor:default;
+        }
+        .msg-footer:hover { transform:scale(1.12); }
+
+        /* MUSIC PLAYER */
+        .music-player {
+            position:fixed;bottom:14px;left:50%;transform:translateX(-50%);z-index:100; width:calc(100% - 28px);max-width:520px; background:rgba(74,14,14,0.9); backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px); border:1.5px solid rgba(255,182,193,0.3);border-radius:22px; padding:9px 12px 7px;box-shadow:0 8px 30px rgba(0,0,0,0.5);
+        }
+        .player-inner { display:flex;align-items:center;gap:8px; }
+        .disc {
+            width:36px;height:36px;min-width:36px;border-radius:50%;overflow:hidden; border:1.5px solid rgba(255,182,193,0.7);box-shadow:0 0 8px rgba(255,182,193,0.35); background:#2a0a0f;position:relative;flex-shrink:0;
+        }
+        .disc img { width:100%;height:100%;object-fit:cover;border-radius:50%;position:absolute;inset:0;z-index:1; }
+        .disc::after {
+            content:'';position:absolute;width:7px;height:7px;border-radius:50%; background:rgba(20,3,8,0.9);border:1.5px solid rgba(255,182,193,0.5); top:50%;left:50%;transform:translate(-50%,-50%);z-index:3;
+        }
+        @keyframes spinDisc { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+        .disc.spinning { animation:spinDisc 4s linear infinite; }
+
+        .player-controls { display:flex;align-items:center;gap:4px;flex-shrink:0; }
+        .ctrl-btn {
+            width:26px;height:26px;border-radius:50%; background:rgba(255,182,193,0.1);border:1px solid rgba(255,182,193,0.3); color:#FFE5EC;font-size:10px;cursor:pointer; display:flex;align-items:center;justify-content:center;transition:all .2s;
+        }
+        .ctrl-btn:hover { background:rgba(212,86,122,0.1);transform:scale(1.1); }
+        .play-btn {
+            width:34px;height:34px;min-width:34px;border-radius:50%; background:linear-gradient(135deg,#800020,#6B1423); border:1.5px solid rgba(255,255,255,0.5);color:#fff;font-size:12px;cursor:pointer; display:flex;align-items:center;justify-content:center; box-shadow:0 3px 10px rgba(0,0,0,0.5);transition:all .2s;flex-shrink:0;
+        }
+        .play-btn:hover { transform:scale(1.1); }
+        .play-btn:active { transform:scale(0.92); }
+
+        .player-info { flex:1;display:flex;flex-direction:column;gap:4px;min-width:0; }
+        .player-top { display:flex;align-items:center;justify-content:space-between;gap:6px; }
+        .song-name { font-size:12px;font-weight:800;color:#FFE5EC;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+        .song-num  { font-size:10px;color:rgba(255,182,193,0.6);flex-shrink:0; }
+        .sound-wave { display:flex;align-items:center;gap:2px;height:20px;flex-shrink:0; }
+        .sound-wave span { display:inline-block;width:3px;border-radius:3px;background:linear-gradient(180deg,#FFB6C1,#FF6B9D);height:4px; }
+        .sound-wave.playing span:nth-child(1){animation:wave .8s ease-in-out infinite 0s}
+        .sound-wave.playing span:nth-child(2){animation:wave .8s ease-in-out infinite .1s}
+        .sound-wave.playing span:nth-child(3){animation:wave .8s ease-in-out infinite .2s}
+        .sound-wave.playing span:nth-child(4){animation:wave .8s ease-in-out infinite .3s}
+        .sound-wave.playing span:nth-child(5){animation:wave .8s ease-in-out infinite .15s}
+        .sound-wave.playing span:nth-child(6){animation:wave .8s ease-in-out infinite .05s}
+        .sound-wave.playing span:nth-child(7){animation:wave .8s ease-in-out infinite .25s}
+        @keyframes wave { 0%,100%{height:4px} 50%{height:18px} }
+        .progress-bar { width:100%;height:4px;background:rgba(255,182,193,0.15);border-radius:10px;cursor:pointer; }
+        .progress-fill { height:100%;background:linear-gradient(90deg,#FFB6C1,#800020);border-radius:10px;width:0%;transition:width .5s linear; }
+        .time-row { display:flex;justify-content:space-between;font-size:9px;color:rgba(255,182,193,0.6);font-weight:600; }
+
+        /* الأزرار العائمة الجديدة والمودال */
+        .fab-add {
+            position: fixed; bottom: 20px; right: 20px; width: 55px; height: 55px;
+            background: linear-gradient(135deg, #FF6B9D, #800020); border: 2px solid var(--pink-main);
+            border-radius: 50%; color: white; font-size: 24px; display: flex; align-items: center;
+            justify-content: center; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.4); z-index: 200;
+            transition: all 0.3s ease;
+        }
+        .fab-add:hover { transform: scale(1.1) rotate(90deg); }
+
+        .fab-view {
+            position: fixed; bottom: 20px; left: 20px; width: 55px; height: 55px;
+            background: linear-gradient(135deg, #6B1423, #4A0E0E); border: 2px solid var(--pink-main);
+            border-radius: 50%; color: var(--pink-main); font-size: 22px; display: flex; align-items: center;
+            justify-content: center; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.4); z-index: 200;
+            transition: all 0.3s ease;
+        }
+        .fab-view:hover { transform: scale(1.1); }
+
+        .custom-modal {
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+            z-index: 300; align-items: center; justify-content: center; padding: 20px;
+            backdrop-filter: blur(8px);
+        }
+        .custom-modal.open { display: flex; }
+        .modal-content {
+            background: rgba(74, 14, 14, 0.95); border: 2px solid var(--pink-border);
+            width: 100%; max-width: 480px; border-radius: 24px; padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); position: relative; color: white;
+        }
+        .modal-title { font-size: 1.3em; color: var(--pink-main); margin-bottom: 20px; text-align: center; font-weight: bold;}
+        .modal-close { position: absolute; top: 15px; left: 15px; background: none; border: none; color: white; font-size: 20px; cursor: pointer; }
+        .form-group { margin-bottom: 15px; display: flex; flex-direction: column; gap: 5px; }
+        .form-group label { font-size: 0.9em; color: var(--pink-light); }
+        .form-control {
+            width: 100%; padding: 12px; background: rgba(255,255,255,0.1); border: 1.5px solid var(--pink-border);
+            border-radius: 12px; color: white; font-family: 'Cairo', sans-serif; outline: none;
+        }
+        .form-control:focus { border-color: var(--pink-main); }
+        .submit-btn {
+            width: 100%; padding: 12px; background: linear-gradient(135deg, #800020, #6B1423);
+            border: 1px solid var(--pink-main); color: white; border-radius: 50px; font-weight: bold;
+            cursor: pointer; margin-top: 10px; transition: background 0.3s;
+        }
+        .submit-btn:hover { background: #800020; }
+        
+        /* قائمة عرض الذكريات المضافة */
+        .memories-list-container {
+            max-height: 60vh; overflow-y: auto; padding-right: 5px; display: flex; flex-direction: column; gap: 15px;
+        }
+        .added-memory-card {
+            background: rgba(255,255,255,0.06); border: 1px solid var(--pink-border); border-radius: 14px; padding: 12px;
+            position: relative;
+        }
+        .added-memory-card img { width: 100%; height: auto; border-radius: 10px; margin-bottom: 8px; max-height: 200px; object-fit: cover;}
+        .added-memory-text { color: var(--pink-text); font-size: 0.95em; line-height: 1.5; margin-bottom: 6px; text-align: right;}
+        .added-memory-date { color: var(--pink-main); font-size: 0.75em; display: block; text-align: left; direction: ltr;}
+        .delete-memory-btn {
+            position: absolute; top: 8px; right: 8px; background: rgba(255,0,0,0.6); border: none;
+            color: white; width: 25px; height: 25px; border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; cursor: pointer; font-size: 12px;
+        }
+
+        @supports (padding-bottom: env(safe-area-inset-bottom)) {
+            body { padding-bottom: calc(110px + env(safe-area-inset-bottom)); }
+            .music-player { bottom: calc(14px + env(safe-area-inset-bottom)); }
+            .fab-add, .fab-view { bottom: calc(20px + env(safe-area-inset-bottom)); }
+        }
+        /* تأثير الرسالة النصية الطائرة فوق الصورة المكبرة */
+.flying-love-message {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 182, 193, 0.95); /* لون بينك ناعم */
+    color: #ffffff;
+    padding: 10px 18px;
+    border-radius: 20px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.1rem;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    white-space: nowrap;
+    pointer-events: none; /* لمنع حجب الضغطات التالية */
+    z-index: 10005; /* تظهر فوق كافة العناصر والطبقات */
+    animation: flyUpAndFade 2.5s ease-out forwards;
+    border: 2px solid #fff;
+}
+
+/* حركة الطيران الفريدة والاختفاء التدريجي */
+@keyframes flyUpAndFade {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, 0) scale(0.7);
+    }
+    15% {
+        opacity: 1;
+        transform: translate(-50%, -40px) scale(1);
+    }
+    85% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -140px) scale(0.8);
+    }
+}
+    </style>
+</head>
+<body>
+
+<div class="floats-container" id="floatsContainer"></div>
+
+<button class="fab-add" id="openAddModalBtn" title="Aggiungi un nuovo ricordo 💖" ><i class="fas fa-plus"></i></button>
+<button class="fab-view" id="openViewModalBtn" title="Mostra i ricordi aggiunti 👁️✨"><i class="fas fa-heart"></i></button>
+
+<div class="custom-modal" id="addMemoryModal">
+    <div class="modal-content">
+        <button class="modal-close" onclick="closeModal('addMemoryModal')"><i class="fas fa-times"></i></button>
+        <div class="modal-title">Aggiungi un nuovo ricordo 💖</div>
+        <div class="form-group">
+            <label>Password per accedere</label>
+            <input type="password" id="memoryPassword" class="form-control" placeholder="Inserisci la password">
+        </div>
+        <div class="form-group">
+            <label>Scrivi il testo del ricordo ✍️💖</label>
+            <textarea id="memoryText" class="form-control" rows="3" placeholder="Cosa è successo in questo giorno felice?..."></textarea>
+        </div>
+        <div class="form-group">
+            <label>Scegli una foto per il ricordo 📸✨</label>
+            <input type="file" id="memoryImage" class="form-control" accept="image/*">
+        </div>
+        <button class="submit-btn" id="saveMemoryBtn">Salva Ricordo ✨</button>
+    </div>
+</div>
+
+<div class="custom-modal" id="viewMemoriesModal">
+    <div class="modal-content">
+        <button class="modal-close" onclick="closeModal('viewMemoriesModal')"><i class="fas fa-times"></i></button>
+        <div class="modal-title">La scatola dei nostri ricordi aggiunti 🎁✨</div>
+        <div class="memories-list-container" id="memoriesListContainer">
+            </div>
+    </div>
+</div>
+
+<div class="page active" id="page1">
+    <div class="hanging-deco">
+        <div class="hang-item"><div class="hang-string"></div><div class="hang-ornament">❤️</div></div>
+        <div class="hang-item"><div class="hang-string"></div><div class="hang-ornament">💖</div></div>
+        <div class="hang-item"><div class="hang-string"></div><div class="hang-ornament">✨</div></div>
+        <div class="hang-item"><div class="hang-string"></div><div class="hang-ornament">💕</div></div>
+        <div class="hang-item"><div class="hang-string"></div><div class="hang-ornament">💗</div></div>
+        <div class="hang-item"><div class="hang-string"></div><div class="hang-ornament">🌸</div></div>
+        <div class="hang-item"><div class="hang-string"></div><div class="hang-ornament">🌹</div></div>
+    </div>
+    <div class="container">
+        <div class="welcome-box">
+            <h1 class="fancy-title">يا حلوتييي ciao</h1>
+            <div class="romantic-text" id="typewriterText"></div>
+            <button class="start-btn" id="startBtn">Sei pronto? </button>
+        </div>
+    </div>
+</div>
+
+<div class="page" id="page2">
+    <div class="hero-section" id="heroSec">
+        <img src="IMG-20260329-WA0064.jpg" alt="Hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-badge">OUR UNIVERSE</div>
+        <div class="scroll-hint" id="scrollHint"><i class="fas fa-chevron-down"></i></div>
+    </div>
+
+    <div class="content-wrap" id="mainContent">
+        <h2 class="page-title"><span class="rainbow-love">Il nostro inizio💞</span></h2>
+        
+        <div class="countdown-wrapper">
+            <div class="countdown-card">
+                <div class="countdown-title"💖Il primo giorno in cui ci siamo incontrati ❤️✨ 2025-12-21 💖></div>
+                <div class="countdown-grid">
+                    <div class="countdown-box"><span class="countdown-number" id="days">00</span><span class="countdown-label">أيام</span></div>
+                    <div class="countdown-box"><span class="countdown-number" id="hours">00</span><span class="countdown-label">ساعات</span></div>
+                    <div class="countdown-box"><span class="countdown-number" id="minutes">00</span><span class="countdown-label">دقائق</span></div>
+                    <div class="countdown-box"><span class="countdown-number" id="seconds">00</span><span class="countdown-label">ثواني</span></div>
+                </div>
+                <div class="countdown-sub">كل ثانية بتعدي وانتِ في قلبي ❤️</div>
+            </div>
+        </div>
+            <div class="caption-card-standalone">
+                <div class="caption-box-new">
+                    <div class="caption-text-new">Il giorno cui ti ho detto ti amo 💗💗💗💗 </div>
+                </div>
+                <div class="caption-pill"><span class="pill-date">2026 / 1 / 21</span></div>
+            </div>
+<div class="photos-stack">
+            
+
+            <div class="photo-card">
+                <img src="IMG-20260329-WA0065.PNG" alt="ذكرى">
+                <div class="caption-simple">اجمل ما رأته عيناي والله❤️</div>
+            </div>
+
+            <div class="photo-card">
+                <img src="IMG-20260419-WA0022.jpg" alt="ذكرى">
+                <div class="caption-simple">بحبك طحننن يا بت💗</div>
+            </div>
+
+            <div class="photo-card">
+                <img src="IMG-20260329-WA0064.jpg" alt="ذكرى">
+                <div class="caption-simple">La foto più bella del Ventunesimo secolo 📸👑</div>
+            </div>
+
+            <div class="photo-card">
+                <img src="IMG-20260216-WA0005.jpg" alt="ذكرى">
+                <div class="caption-simple">الصوره ليها ذكري خاصه في قلبي 😌😌😘😘</div>
+            </div>
+
+            <div class="photo-card">
+                <img src="IMG-20260320-WA0000.PNG" alt="ذكرى">
+                <div class="caption-simple">La seconda foto più bella del Ventunesimo secolo 📸❤️</div>
+            </div>
+
+            <div class="photo-card">
+                <img src="IMG-20260320-WA0001.jpg" alt="ذكرى">
+                <div class="caption-simple">بالمناسبه الصوره المره اللي سمعنا فيها اغنيه عودونيييي 🥰🥰🥰🥰</div>
+            </div>
+
+            <div class="photo-card">
+                <img src="IMG-20260503-WA0042.jpg" alt="ذكرى">
+                <div class="caption-simple">بحبك للمره الخمستاشر الف بوسهه 😘😘😘</div>
+            </div>
+
+            <div class="photo-card">
+                <img src="IMG-20270503-WA0042.jpg" alt="ذكرى">
+                <div class="caption-simple">معرفش اخويا محشور ليه في الصوره بس بحبك موت وبحب الصوره دي💞</div>
+            </div>
+
+            <div class="photo-card">
+                <img src="IMG-20290503-WA0042.jpg" alt="ذكرى">
+                <div class="caption-simple">la mia principessa❤️❤️❤️❤️❤️ طبعااااااااااا</div>
+            </div>
+
+        </div>
+
+
+        <div class="final-cta">
+            <p class="cta-text" style="color:var(--pink-main)">💕 Ti amo  💕</p>
+            <button class="next-btn" id="toPage3Btn">Il messaggio ✉️💌</button>
+        </div>
+    </div>
+</div>
+
+<div class="page" id="page3">
+    <div class="msg-wrap">
+        <h2 class="msg-title"> Il messaggio che non si dice mai abbastanza </h2>
+        <div class="messages-container">
+            <div class="message">بحبك اوي وشكرًا انك ديمًأ جنبي وبتشجعيني علي اي شئ حتي لو تافه بجد و بجد انا حياتي بعد منك اتعيرت للاحسن ب360 درجه واللي في قلبي ليكي كتير جدا </div>
+            <div class="message">حقك عليا اخر مره بجد لو كنت ضايقت لما خبطتك غصب عني بس والله ما اقصد خالص و رزعي براحتك يا حبيبي 🙈🙈🙈</div>
+            <div class="message">حقك عليا لو ضايقتك يوم او في اي وقت بدون قصد 😘</div>
+            <div class="msg-footer">Ti amo con tutto il mio cuore,Sei la mia principessa, e sarai sempre lo stesso per me👸💗💗.</div>
+            <div class="message">Ti amo infinitamente 💕😘😘😘</div>
+
+        </div>
+        <button class="next-btn" id="backBtn"><i class="fas fa-arrow-right" style="margin-left:8px"></i>🔂Ricordi🔂</button>
+    </div>
+</div>
+
+<div class="lightbox" id="lightbox">
+    <button class="lb-close" id="lbClose"><i class="fas fa-times"></i></button>
+    <img id="lbImg" src="" alt="Zoomed">
+</div>
+
+<div class="music-player">
+    <div class="player-inner">
+        <div class="disc spinning" id="musicDisc">
+            <img src="2222.jpg" alt="Disc">
+        </div>
+        <div class="player-controls">
+            <button class="ctrl-btn" id="prevBtn"><i class="fas fa-backward"></i></button>
+            <button class="play-btn" id="playBtn"><i class="fas fa-pause"></i></button>
+            <button class="ctrl-btn" id="nextBtn"><i class="fas fa-forward"></i></button>
+        </div>
+        <div class="player-info">
+            <div class="player-top">
+                <span class="song-name" id="songName">جاري تحميل اللحن... ✨</span>
+                <span class="song-num" id="songNum">1 / 12</span>
+                <div class="sound-wave playing" id="soundWave">
+                    <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                </div>
+            </div>
+            <div class="progress-bar" id="progressBar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="time-row">
+                <span id="currTime">0:00</span>
+                <span id="totalTime">0:00</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<audio id="mainAudio"></audio>
+
+<script>
+    /* ===== البيانات الثابتة والتهيئة للتايب رايتر والعداد الحسابي ===== */
+    const textLines = [
+        "احب اوضح اكتر من شئ بجد و هي اني بحب اقعد معاكي وبحب القعده معاكي والهكش والنكش اللي بنعمله دا و زي ما قولت قبل كدا بجد كل ما بشوفك بحس بلفهه وبحس بشغف وبيزيد تقريبًا مع الوقت وبحس اني مبسوط جدا جدا وانا معاكي وربنا يخليكي ليا يا نور عيوني والله امواهههه  يا أحلى من رأته عيوني..",
+        "والله أنا كل يوم بحس إنك بقتي جزء مهم جدًا من حياتيي بحب أسمع صوتك يوميا واتعودت اني اسمعه و بحب أشوف ابتسامتك وبحب اي احساس بيجيلي لما بنكون مع بعض إحساس اني مبسوط وبجد اللهفه الغير طبيبعيه لسه موجوده معرفش ازاييي أنتي ",
+        "بتخلي أيامي أحلى وأجمل وبجد بقيت الشخص  بفكر فيه طول الوقت تلقائيي ربنا يديمك في حياتي ويخليكي ليا ديما يا رب لحد ما نوصل 200 سنهههه بحبك أوي أوي 💗💗💗💗💗💗💗💗😘 😘"
+    ];
+    const startDate = new Date("2025-12-21T17:20:00"); // العداد مضبوط بالكامل بالوقت الصحيح
+    const originalPass = "1234"; // الرقم السري لإضافة الذكريات
+
+    /* ===== نظام مشغل الموسيقى المتطور لـ 12 أغنية ===== */
+    const playlist = [
+        { name: "عودوني - عمرو دياب 🎵", src: "Awedony.mp3" },
+        { name: "لما صحيت -  وردة 🌸", src: "Lama_Saheet.mp3" },
+         { name: "قلبي  -  عمرو ديا& الشاب خالد ", src: "Alby.mp3" },
+        { name: "إلا هي - عمرو دياب ✨", src: "Ella_Heya.mp3" },
+        { name: "إرضى بالنصيب - جورج وسوف 🎙️", src: "Erda_bil_Nasib.mp3" },
+        { name: "جيمس دين  -  أمير عيد 🎻", src: "gyms_dyn.mp3" },
+        { name: "هو إنت مين - أنغام ❤️", src: "hw_ant_myn.mp3" },
+        { name: "كلام الناس - جورج وسوف 🎶", src: "Kalam_Ennas.mp3" },
+        { name: "مش حبيبي بس - أنغام  💕", src: "msh_hbyby_bs.mp3" },
+        { name: "نفسي أحبك - وسط البلد 💗", src: "nfsy_ahbk.mp3" },
+        { name: "يوم وليلة - وردة  🌹", src: "يوم وليله.mp3" },
+        { name: "أمتي الزمان -  محمد عبد الوهاب 🎹", src: "Amte_Al-zman.mp3" },
+        { name: " Ed Sheeran - Perfect 🔮", src: "cNGjD0VG4R8.mp3" }
+
+    ];
+
+    let currentTrackIdx = 0;
+    const audioEl = document.getElementById('mainAudio');
+    const playBtn = document.getElementById('playBtn');
+    const musicDisc = document.getElementById('musicDisc');
+    const soundWave = document.getElementById('soundWave');
+    const songNameText = document.getElementById('songName');
+    const songNumText = document.getElementById('songNum');
+    const progressFill = document.getElementById('progressFill');
+    const progressBar = document.getElementById('progressBar');
+    const currTimeText = document.getElementById('currTime');
+    const totalTimeText = document.getElementById('totalTime');
+
+    // تحميل الأغنية الحالية وتحديث البيانات
+    function loadTrack(idx) {
+        if(idx < 0) idx = playlist.length - 1;
+        if(idx >= playlist.length) idx = 0;
+        currentTrackIdx = idx;
+
+        if (audioEl) {
+            audioEl.src = playlist[currentTrackIdx].src;
+            if (songNameText) songNameText.textContent = playlist[currentTrackIdx].name;
+            if (songNumText) songNumText.textContent = (currentTrackIdx + 1) + " / " + playlist.length;
+            if (progressFill) progressFill.style.width = '0%';
+            if (currTimeText) currTimeText.textContent = "0:00";
+            if (totalTimeText) totalTimeText.textContent = "0:00";
+        }
+    }
+
+    // تشغيل / إيقاف مؤقت
+    function togglePlay() {
+        if (!audioEl) return;
+        if (audioEl.paused) {
+            audioEl.play().then(() => {
+                if (playBtn) playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                if (musicDisc) musicDisc.classList.add('spinning');
+                if (soundWave) soundWave.classList.add('playing');
+            }).catch(err => console.log("في انتظار تفاعل المستخدم لتشغيل الصوت تلقائياً."));
+        } else {
+            audioEl.focus();
+            audioEl.pause();
+            if (playBtn) playBtn.innerHTML = '<i class="fas fa-play"></i>';
+            if (musicDisc) musicDisc.classList.remove('spinning');
+            if (soundWave) soundWave.classList.remove('playing');
+        }
+    }
+
+    function nextTrack() {
+        loadTrack(currentTrackIdx + 1);
+        if (audioEl) {
+            audioEl.play().then(() => {
+                if (playBtn) playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                if (musicDisc) musicDisc.classList.add('spinning');
+                if (soundWave) soundWave.classList.add('playing');
+            });
+        }
+    }
+
+    function prevTrack() {
+        loadTrack(currentTrackIdx - 1);
+        if (audioEl) {
+            audioEl.play().then(() => {
+                if (playBtn) playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                if (musicDisc) musicDisc.classList.add('spinning');
+                if (soundWave) soundWave.classList.add('playing');
+            });
+        }
+    }
+
+    // تحويل الوقت من ثواني إلى صيغة دقيقة:ثانية
+    function formatTime(secs) {
+        if (isNaN(secs)) return "0:00";
+        const m = Math.floor(secs / 60);
+        const s = Math.floor(secs % 60);
+        return m + ":" + (s < 10 ? '0' : '') + s;
+    }
+
+    if (audioEl) {
+        // تحديث شريط التقدم والوقت أثناء التشغيل
+        audioEl.addEventListener('timeupdate', () => {
+            if (audioEl.duration) {
+                const pct = (audioEl.currentTime / audioEl.duration) * 100;
+                if (progressFill) progressFill.style.width = pct + '%';
+                if (currTimeText) currTimeText.textContent = formatTime(audioEl.currentTime);
+                if (totalTimeText) totalTimeText.textContent = formatTime(audioEl.duration);
+            }
+        });
+
+        // تشغيل الأغنية التالية تلقائياً عند انتهاء الأغنية الحالية
+        audioEl.addEventListener('ended', nextTrack);
+    }
+
+    // عند الضغط على شريط التقدم لتغيير وقت الأغنية
+    if (progressBar) {
+        progressBar.addEventListener('click', (e) => {
+            const rect = progressBar.getBoundingClientRect();
+            const pct = (e.clientX - rect.left) / rect.width;
+            if (audioEl && audioEl.duration) {
+                audioEl.currentTime = pct * audioEl.duration;
+            }
+        });
+    }
+
+    /* ===== NAVIGATION & TYPEWRITER ===== */
+    function goToPage2(){
+        document.getElementById('page1').classList.remove('active');
+        document.getElementById('page2').classList.add('active');
+        window.scrollTo(0,0);
+        initCountdown();
+        
+        // تشغيل الموسيقى تلقائياً فور الدخول لصفحة الذكريات
+        setTimeout(() => {
+            if (audioEl && audioEl.paused) togglePlay();
+        }, 300);
+    }
+
+    function goToPage3(){
+        document.getElementById('page2').classList.remove('active');
+        document.getElementById('page3').classList.add('active');
+        window.scrollTo(0,0);
+        
+        const msgs = document.querySelectorAll('#page3 .message');
+        msgs.forEach((m, idx) => {
+            setTimeout(() => { m.classList.add('show'); }, idx * 450);
+        });
+    }
+
+    function backToMemories(){
+        document.getElementById('page3').classList.remove('active');
+        document.getElementById('page2').classList.add('active');
+        window.scrollTo(0,0);
+    }
+
+    // تأثير الكتابة الآلية
+    let lineIdx = 0, charIdx = 0;
+    const dest = document.getElementById("typewriterText");
+    function typeEffect(){
+        if(lineIdx < textLines.length){
+            if(charIdx === 0) {
+                dest.innerHTML += (lineIdx > 0 ? "<br><br>" : "") + "";
+            }
+            let currentLine = textLines[lineIdx];
+            if (currentLine.substr(charIdx, 1) === "<") {
+                let tagLength = currentLine.substr(charIdx).indexOf(">") + 1;
+                dest.innerHTML += currentLine.substr(charIdx, tagLength);
+                charIdx += tagLength;
+            } else {
+                dest.innerHTML += currentLine.substr(charIdx, 1);
+                charIdx++;
+            }
+            
+            if(charIdx < currentLine.length){
+                setTimeout(typeEffect, window.innerWidth < 500 ? 35 : 45);
+            } else {
+                lineIdx++; charIdx = 0;
+                setTimeout(typeEffect, 600);
+            }
+        } else {
+            // إظهار زر الدخول بعد انتهاء الكتابة
+            setTimeout(() => {
+                const btn = document.getElementById('startBtn');
+                if(btn) btn.classList.add('show');
+            }, 300);
+        }
+    }
+
+    /* ===== COUNTDOWN TIMER ===== */
+    let timerInterval;
+    function initCountdown(){
+        if(timerInterval) clearInterval(timerInterval);
+        function update(){
+            const now = new Date();
+            const diff = now - startDate;
+            if(diff < 0) return;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const mins = Math.floor((diff / (1000 * 60)) % 60);
+            const secs = Math.floor((diff / 1000) % 60);
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(mins).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(secs).padStart(2, '0');
+        }
+        update();
+        timerInterval = setInterval(update, 1000);
+    }
+
+/* ===== LIGHTBOX FUNCTIONALITY ===== */
+    let lightboxClickCount = 0; // عداد لمتابعة عدد الضغطات على الصورة المكبرة
+
+    function openLightbox(src){
+        const lb = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lbImg');
+        lbImg.src = src;
+        lb.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        lightboxClickCount = 0; // إعادة تصفير العداد عند فتح أي صورة جديدة
+    }
+    
+    // زر إغلاق اللايت بوكس
+    document.getElementById('lbClose').addEventListener('click', ()=>{
+        document.getElementById('lightbox').classList.remove('open');
+        document.body.style.overflow = '';
+    });
+
+    // تأثير انفجار الإيموجيات ورسائل الحب الطائرة عند الضغط على الصورة المكبرة
+    const lbImgContainer = document.getElementById('lbImg');
+    if (lbImgContainer) {
+        lbImgContainer.addEventListener('click', (e) => {
+            e.stopPropagation(); // منع أي أحداث أخرى من إغلاق النافذة
+
+            const lightboxEl = document.getElementById('lightbox');
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+
+            // 1. زيادة عداد الضغطات بمقدار 1
+            lightboxClickCount++;
+
+            // 2. تأثير انفجار القلوب والإيموجيات العشوائية (يحدث مع كل ضغطة)
+            for(let i=0; i<6; i++){
+                const heart = document.createElement('div');
+                heart.className = 'heart-burst';
+                heart.textContent = ['😘','😘','😘','😘','😘','😘'][Math.floor(Math.random()*6)];
+                
+                heart.style.position = 'fixed';
+                heart.style.left = (mouseX + (Math.random()*40 - 20)) + 'px';
+                heart.style.top = (mouseY + (Math.random()*40 - 20)) + 'px';
+                heart.style.zIndex = '10000';
+                
+                lightboxEl.appendChild(heart);
+                setTimeout(() => heart.remove(), 700);
+            }
+
+            // 3. التحقق إذا أتم المستخدم 5 ضغطات أو مضاعفاتها تظهر الرسالة الطائرة بدلاً من الـ alert
+            if (lightboxClickCount % 5 === 0) {
+                // مصفوفة تحتوي على عبارات لطيفة تظهر عشوائياً عند كل 5 ضغطات
+                const loveMessages = [
+                    "مش كفايههه بوس ؟؟ 😂😂😘",
+                    " بوسي يا حلوهه بوسي 😘😘",
+                    "هععععع بحبككك يا بت والله اموااااااههههه 😘😘😘",
+                    "بوسه تاني بقي  🙈🙈🙈 ",
+                    "اخر بوسه خلاص 😂😂😂😘😘😘 ",
+                ];
+                
+                // اختيار رسالة عشوائية من القائمة
+                const randomMessage = loveMessages[Math.floor(Math.random() * loveMessages.length)];
+                
+                // إنشاء عنصر الرسالة الطائرة وتحديد مكان خروجه
+                const flyingText = document.createElement('div');
+                flyingText.className = 'flying-love-message';
+                flyingText.textContent = randomMessage;
+                
+                // جعل الرسالة تخرج من منتصف نقطة الضغط تماماً
+                flyingText.style.left = mouseX + 'px';
+                flyingText.style.top = mouseY + 'px';
+                
+                lightboxEl.appendChild(flyingText);
+                
+                // إزالة عنصر الرسالة بعد انتهاء الأنيمنش الخاص بها (2.5 ثانية)
+                setTimeout(() => {
+                    flyingText.remove();
+                }, 3500);
+            }
+        });
+    }
+
+    function tapCard(e, card){
+        // تأثير التموج Ripple
+        const rippleCont = document.createElement('div');
+        rippleCont.className = 'ripple-container';
+        const ripple = document.createElement('div');
+        ripple.className = 'ripple';
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+        rippleCont.appendChild(ripple);
+        card.appendChild(rippleCont);
+        setTimeout(() => rippleCont.remove(), 600);
+
+        // انفجار القلوب العشوائية
+        for(let i=0; i<6; i++){
+            const heart = document.createElement('div');
+            heart.className = 'heart-burst';
+            heart.textContent = ['😘','😘','😘','😘','😘','😘'][Math.floor(Math.random()*6)];
+            heart.style.left = (x + (Math.random()*40 - 20)) + 'px';
+            heart.style.top = (y + (Math.random()*40 - 20)) + 'px';
+            card.appendChild(heart);
+            setTimeout(() => heart.remove(), 700);
+        }
+
+        // تكبير الصورة عبر اللايت بوكس
+        const img = card.querySelector('img');
+        if(img) setTimeout(() => openLightbox(img.src), 250);
+    }
+
+    /* ===== إدارة المودال والذكريات المضافة الجديدة ===== */
+    function openModal(id) {
+        document.getElementById(id).classList.add('open');
+        if (id === 'viewMemoriesModal') {
+            renderAddedMemories();
+        }
+    }
+    function closeModal(id) {
+        document.getElementById(id).classList.remove('open');
+    }
+
+    document.getElementById('openAddModalBtn').addEventListener('click', () => openModal('addMemoryModal'));
+    document.getElementById('openViewModalBtn').addEventListener('click', () => openModal('viewMemoriesModal'));
+
+    // حفظ ذكريات جديدة
+    document.getElementById('saveMemoryBtn').addEventListener('click', () => {
+        const passwordInput = document.getElementById('memoryPassword').value;
+        const textInput = document.getElementById('memoryText').value;
+        const imageInput = document.getElementById('memoryImage').files[0];
+
+        if (passwordInput !== originalPass) {
+            alert('عذراً، كلمة المرور خاطئة! لا يمكن إضافة ذكرى بدون الصلاحية ❤️');
+            return;
+        }
+        if (!textInput.trim()) {
+            alert('اكتب نصاً عن الذكرى.');
+            return;
+        }
+
+        const proceedAndSave = (base64Image = "") => {
+            const now = new Date();
+            const daysOfWeek = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+            const formattedDate = daysOfWeek[now.getDay()] + " - " + now.toLocaleDateString('ar-EG') + " - " + now.toLocaleTimeString('ar-EG', {hour: '2-digit', minute:'2-digit'});
+
+            const newMemory = {
+                id: Date.now(),
+                text: textInput,
+                image: base64Image,
+                date: formattedDate
+            };
+
+            let memories = JSON.parse(localStorage.getItem('user_memories')) || [];
+            memories.unshift(newMemory);
+            localStorage.setItem('user_memories', JSON.stringify(memories));
+
+            alert('تم تخليد الذكرى بنجاح وحفظها في الصندوق 💖');
+            
+            document.getElementById('memoryPassword').value = "";
+            document.getElementById('memoryText').value = "";
+            document.getElementById('memoryImage').value = "";
+            closeModal('addMemoryModal');
+        };
+
+        if (imageInput) {
+            const reader = new FileReader();
+            reader.onloadend = function () {
+                proceedAndSave(reader.result);
+            };
+            reader.readAsDataURL(imageInput);
+        } else {
+            proceedAndSave("");
+        }
+    });
+
+    // عرض الذكريات المضافة في قائمة العرض (تم التعديل لحل مشكلة الأقواس تماماً)
+    function renderAddedMemories() {
+        const container = document.getElementById('memoriesListContainer');
+        container.innerHTML = "";
+        const memories = JSON.parse(localStorage.getItem('user_memories')) || [];
+
+        if (memories.length === 0) {
+            container.innerHTML = '<p style="text-align:center; color:rgba(255,182,193,0.6); padding:20px; font-size:0.95em;">Non ci sono ancora ricordi aggiunti.. Premi il pulsante (+) per aggiungere il vostro primo felice ricordo! 💖</p>';
+            return;
+        }
+
+        memories.forEach(memory => {
+            const card = document.createElement('div');
+            card.className = 'added-memory-card';
+            
+            let imgTag = memory.image ? '<img src="' + memory.image + '" alt="Memory" onclick="openLightbox(\'' + memory.image + '\')">' : '';
+            
+            card.innerHTML = 
+                '<button class="delete-memory-btn" onclick="deleteMemory(' + memory.id + ')" title="Elimina Ricordo"><i class="fas fa-trash"></i></button>' +
+                imgTag +
+                '<div class="added-memory-text">' + escapeHtml(memory.text) + '</div>' +
+                '<span class="added-memory-date"><i class="far fa-clock"></i> ' + memory.date + '</span>';
+                
+            container.appendChild(card);
+        });
+    }
+
+    // حذف ذكرى معينة
+    window.deleteMemory = function(id) {
+        if (confirm('Sei sicuro di voler eliminare questo bel ricordo?')) {
+            let memories = JSON.parse(localStorage.getItem('user_memories')) || [];
+            memories = memories.filter(m => m.id !== id);
+            localStorage.setItem('user_memories', JSON.stringify(memories));
+            renderAddedMemories();
+        }
+    };
+
+    function escapeHtml(text) {
+        return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
+
+    /* ===== EVENT LISTENERS & INITS ===== */
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(typeEffect, 800);
+        loadTrack(0); // تهيئة الأغنية الأولى في الخلفية
+    });
+
+    if(playBtn) playBtn.addEventListener('click', togglePlay);
+    if(document.getElementById('nextBtn')) document.getElementById('nextBtn').addEventListener('click', nextTrack);
+    if(document.getElementById('prevBtn')) document.getElementById('prevBtn').addEventListener('click', prevTrack);
+
+    if(document.getElementById('startBtn')) document.getElementById('startBtn').addEventListener('click', goToPage2);
+    if(document.getElementById('toPage3Btn')) document.getElementById('toPage3Btn').addEventListener('click', goToPage3);
+    if(document.getElementById('backBtn')) document.getElementById('backBtn').addEventListener('click', backToMemories);
+    
+    const scrollHint = document.getElementById('scrollHint');
+    if(scrollHint) scrollHint.addEventListener('click', ()=>{
+        document.getElementById('mainContent').scrollIntoView({behavior:'smooth'});
+    });
+
+    document.addEventListener('click', (e)=>{
+        const card = e.target.closest('.photo-card');
+        if(card) tapCard(e, card);
+    });
+
+    // قلوب متطايرة عشوائية في الخلفية بشكل مستمر
+    const heartIcons = ['❤️', '💗', '❤️', '💕', '😘', '💞'];
+    setInterval(()=>{
+        const container = document.getElementById('floatsContainer');
+        if (container && container.children.length < 25) { 
+            for(let i=0; i<2; i++){
+                const el = document.createElement('div');
+                el.className = 'float-item';
+                el.textContent = heartIcons[Math.floor(Math.random()*heartIcons.length)];
+                el.style.left = Math.random()*100+'%';
+                el.style.fontSize = (Math.random()*14+26)+'px';
+                el.style.animationDuration = (Math.random()*5+8)+'s';
+                el.style.animationDelay = (Math.random()*.8)+'s';
+                container.appendChild(el);
+                setTimeout(() => el.remove(), 13000);
+            }
+        }
+    }, 2500);
+</script>
+</body>
+</html>
