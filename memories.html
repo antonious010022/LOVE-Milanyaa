@@ -683,21 +683,42 @@
 
 <audio id="mainAudio"></audio>
 
-<script>
+<script type="module">
+    /* ===== استيراد مكتبات Firebase المطلوبة ===== */
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+    import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
+
+    /* ===== إعدادات حساب Firebase الخاص بك ===== */
+    const firebaseConfig = {
+        apiKey: "AIzaSyDRxqNWUp9ZDqdEuJhMPWozM3do6iBvlqc",
+        authDomain: "cccxv-8dd75.firebaseapp.com",
+        projectId: "cccxv-8dd75",
+        storageBucket: "cccxv-8dd75.firebasestorage.app",
+        messagingSenderId: "109672810332",
+        appId: "1:109672810332:web:27c33da88182ff4a7de399",
+        measurementId: "G-92Q5M090ZP"
+    };
+
+    // تهيئة وتفعيل Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const storage = getStorage(app);
+
     /* ===== البيانات الثابتة والتهيئة للتايب رايتر والعداد الحسابي ===== */
     const textLines = [
         "احب اوضح اكتر من شئ بجد و هي اني بحب اقعد معاكي وبحب القعده معاكي والهكش والنكش اللي بنعمله دا و زي ما قولت قبل كدا بجد كل ما بشوفك بحس بلفهه وبحس بشغف وبيزيد تقريبًا مع الوقت وبحس اني مبسوط جدا جدا وانا معاكي وربنا يخليكي ليا يا نور عيوني والله امواهههه  يا أحلى من رأته عيوني..",
         "والله أنا كل يوم بحس إنك بقتي جزء مهم جدًا من حياتيي بحب أسمع صوتك يوميا واتعودت اني اسمعه و بحب أشوف ابتسامتك وبحب اي احساس بيجيلي لما بنكون مع بعض إحساس اني مبسوط وبجد اللهفه الغير طبيبعيه لسه موجوده معرفش ازاييي أنتي ",
         "بتخلي أيامي أحلى وأجمل وبجد بقيت الشخص  بفكر فيه طول الوقت تلقائيي ربنا يديمك في حياتي ويخليكي ليا ديما يا رب لحد ما نوصل 200 سنهههه بحبك أوي أوي 💗💗💗💗💗💗💗💗😘 😘"
     ];
-    const startDate = new Date("2025-12-21T17:20:00"); // العداد مضبوط بالكامل بالوقت الصحيح
-    const originalPass = "milanyaa&tonaa"; // الرقم السري لإضافة الذكريات
+    const startDate = new Date("2025-12-21T17:20:00"); 
+    const originalPass = "1234"; 
 
     /* ===== نظام مشغل الموسيقى المتطور لـ 12 أغنية ===== */
     const playlist = [
         { name: "عودوني - عمرو دياب 🎵", src: "Awedony.mp3" },
         { name: "لما صحيت -  وردة 🌸", src: "Lama_Saheet.mp3" },
-         { name: "قلبي  -  عمرو ديا& الشاب خالد ", src: "Alby.mp3" },
+        { name: "قلبي  -  عمرو ديا& الشاب خالد ", src: "Alby.mp3" },
         { name: "إلا هي - عمرو دياب ✨", src: "Ella_Heya.mp3" },
         { name: "إرضى بالنصيب - جورج وسوف 🎙️", src: "Erda_bil_Nasib.mp3" },
         { name: "جيمس دين  -  أمير عيد 🎻", src: "gyms_dyn.mp3" },
@@ -708,7 +729,6 @@
         { name: "يوم وليلة - وردة  🌹", src: "يوم وليله.mp3" },
         { name: "أمتي الزمان -  محمد عبد الوهاب 🎹", src: "Amte_Al-zman.mp3" },
         { name: " Ed Sheeran - Perfect 🔮", src: "cNGjD0VG4R8.mp3" }
-
     ];
 
     let currentTrackIdx = 0;
@@ -723,7 +743,6 @@
     const currTimeText = document.getElementById('currTime');
     const totalTimeText = document.getElementById('totalTime');
 
-    // تحميل الأغنية الحالية وتحديث البيانات
     function loadTrack(idx) {
         if(idx < 0) idx = playlist.length - 1;
         if(idx >= playlist.length) idx = 0;
@@ -739,7 +758,6 @@
         }
     }
 
-    // تشغيل / إيقاف مؤقت
     function togglePlay() {
         if (!audioEl) return;
         if (audioEl.paused) {
@@ -779,7 +797,6 @@
         }
     }
 
-    // تحويل الوقت من ثواني إلى صيغة دقيقة:ثانية
     function formatTime(secs) {
         if (isNaN(secs)) return "0:00";
         const m = Math.floor(secs / 60);
@@ -788,7 +805,6 @@
     }
 
     if (audioEl) {
-        // تحديث شريط التقدم والوقت أثناء التشغيل
         audioEl.addEventListener('timeupdate', () => {
             if (audioEl.duration) {
                 const pct = (audioEl.currentTime / audioEl.duration) * 100;
@@ -797,12 +813,9 @@
                 if (totalTimeText) totalTimeText.textContent = formatTime(audioEl.duration);
             }
         });
-
-        // تشغيل الأغنية التالية تلقائياً عند انتهاء الأغنية الحالية
         audioEl.addEventListener('ended', nextTrack);
     }
 
-    // عند الضغط على شريط التقدم لتغيير وقت الأغنية
     if (progressBar) {
         progressBar.addEventListener('click', (e) => {
             const rect = progressBar.getBoundingClientRect();
@@ -820,7 +833,6 @@
         window.scrollTo(0,0);
         initCountdown();
         
-        // تشغيل الموسيقى تلقائياً فور الدخول لصفحة الذكريات
         setTimeout(() => {
             if (audioEl && audioEl.paused) togglePlay();
         }, 300);
@@ -843,7 +855,6 @@
         window.scrollTo(0,0);
     }
 
-    // تأثير الكتابة الآلية
     let lineIdx = 0, charIdx = 0;
     const dest = document.getElementById("typewriterText");
     function typeEffect(){
@@ -868,7 +879,6 @@
                 setTimeout(typeEffect, 600);
             }
         } else {
-            // إظهار زر الدخول بعد انتهاء الكتابة
             setTimeout(() => {
                 const btn = document.getElementById('startBtn');
                 if(btn) btn.classList.add('show');
@@ -897,38 +907,35 @@
         timerInterval = setInterval(update, 1000);
     }
 
-/* ===== LIGHTBOX FUNCTIONALITY ===== */
-    let lightboxClickCount = 0; // عداد لمتابعة عدد الضغطات على الصورة المكبرة
+    /* ===== LIGHTBOX FUNCTIONALITY ===== */
+    let lightboxClickCount = 0; 
 
-    function openLightbox(src){
+    // جعل الدالة متاحة عالمياً لأن استدعاءها يتم من الـ HTML الديناميكي
+    window.openLightbox = function(src){
         const lb = document.getElementById('lightbox');
         const lbImg = document.getElementById('lbImg');
         lbImg.src = src;
         lb.classList.add('open');
         document.body.style.overflow = 'hidden';
-        lightboxClickCount = 0; // إعادة تصفير العداد عند فتح أي صورة جديدة
+        lightboxClickCount = 0; 
     }
     
-    // زر إغلاق اللايت بوكس
     document.getElementById('lbClose').addEventListener('click', ()=>{
         document.getElementById('lightbox').classList.remove('open');
         document.body.style.overflow = '';
     });
 
-    // تأثير انفجار الإيموجيات ورسائل الحب الطائرة عند الضغط على الصورة المكبرة
     const lbImgContainer = document.getElementById('lbImg');
     if (lbImgContainer) {
         lbImgContainer.addEventListener('click', (e) => {
-            e.stopPropagation(); // منع أي أحداث أخرى من إغلاق النافذة
+            e.stopPropagation(); 
 
             const lightboxEl = document.getElementById('lightbox');
             const mouseX = e.clientX;
             const mouseY = e.clientY;
 
-            // 1. زيادة عداد الضغطات بمقدار 1
             lightboxClickCount++;
 
-            // 2. تأثير انفجار القلوب والإيموجيات العشوائية (يحدث مع كل ضغطة)
             for(let i=0; i<6; i++){
                 const heart = document.createElement('div');
                 heart.className = 'heart-burst';
@@ -943,9 +950,7 @@
                 setTimeout(() => heart.remove(), 700);
             }
 
-            // 3. التحقق إذا أتم المستخدم 5 ضغطات أو مضاعفاتها تظهر الرسالة الطائرة بدلاً من الـ alert
             if (lightboxClickCount % 5 === 0) {
-                // مصفوفة تحتوي على عبارات لطيفة تظهر عشوائياً عند كل 5 ضغطات
                 const loveMessages = [
                     "مش كفايههه بوس ؟؟ 😂😂😘",
                     " بوسي يا حلوهه بوسي 😘😘",
@@ -954,21 +959,17 @@
                     "اخر بوسه خلاص 😂😂😂😘😘😘 ",
                 ];
                 
-                // اختيار رسالة عشوائية من القائمة
                 const randomMessage = loveMessages[Math.floor(Math.random() * loveMessages.length)];
                 
-                // إنشاء عنصر الرسالة الطائرة وتحديد مكان خروجه
                 const flyingText = document.createElement('div');
                 flyingText.className = 'flying-love-message';
                 flyingText.textContent = randomMessage;
                 
-                // جعل الرسالة تخرج من منتصف نقطة الضغط تماماً
                 flyingText.style.left = mouseX + 'px';
                 flyingText.style.top = mouseY + 'px';
                 
                 lightboxEl.appendChild(flyingText);
                 
-                // إزالة عنصر الرسالة بعد انتهاء الأنيمنش الخاص بها (2.5 ثانية)
                 setTimeout(() => {
                     flyingText.remove();
                 }, 3500);
@@ -977,7 +978,6 @@
     }
 
     function tapCard(e, card){
-        // تأثير التموج Ripple
         const rippleCont = document.createElement('div');
         rippleCont.className = 'ripple-container';
         const ripple = document.createElement('div');
@@ -991,7 +991,6 @@
         card.appendChild(rippleCont);
         setTimeout(() => rippleCont.remove(), 600);
 
-        // انفجار القلوب العشوائية
         for(let i=0; i<6; i++){
             const heart = document.createElement('div');
             heart.className = 'heart-burst';
@@ -1002,17 +1001,13 @@
             setTimeout(() => heart.remove(), 700);
         }
 
-        // تكبير الصورة عبر اللايت بوكس
         const img = card.querySelector('img');
         if(img) setTimeout(() => openLightbox(img.src), 250);
     }
 
-    /* ===== إدارة المودال والذكريات المضافة الجديدة ===== */
+    /* ===== إدارة المودال والذكريات المضافة السحابية (Firebase) ===== */
     function openModal(id) {
         document.getElementById(id).classList.add('open');
-        if (id === 'viewMemoriesModal') {
-            renderAddedMemories();
-        }
     }
     function closeModal(id) {
         document.getElementById(id).classList.remove('open');
@@ -1020,12 +1015,22 @@
 
     document.getElementById('openAddModalBtn').addEventListener('click', () => openModal('addMemoryModal'));
     document.getElementById('openViewModalBtn').addEventListener('click', () => openModal('viewMemoriesModal'));
+    
+    // ربط أزرار الإغلاق يدوياً
+    const closeButtons = document.querySelectorAll('.modal-close, [id^="close"]');
+    closeButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const modal = e.target.closest('.modal') || e.target.closest('[id$="Modal"]');
+            if(modal) closeModal(modal.id);
+        });
+    });
 
-    // حفظ ذكريات جديدة
-    document.getElementById('saveMemoryBtn').addEventListener('click', () => {
+    // حفظ ذكريات جديدة سحابياً
+    document.getElementById('saveMemoryBtn').addEventListener('click', async () => {
         const passwordInput = document.getElementById('memoryPassword').value;
         const textInput = document.getElementById('memoryText').value;
         const imageInput = document.getElementById('memoryImage').files[0];
+        const saveBtn = document.getElementById('saveMemoryBtn');
 
         if (passwordInput !== originalPass) {
             alert('عذراً، كلمة المرور خاطئة! لا يمكن إضافة ذكرى بدون الصلاحية ❤️');
@@ -1036,77 +1041,113 @@
             return;
         }
 
-        const proceedAndSave = (base64Image = "") => {
+        // تغيير حالة الزرار أثناء الرفع منعاً للضغط المتكرر
+        saveBtn.disabled = true;
+        saveBtn.innerText = "جاري الحفظ والرفع... ⏳";
+
+        try {
+            let imageUrl = "";
+
+            // إذا أضاف المستخدم صورة، نرفعها لـ Firebase Storage أولاً
+            if (imageInput) {
+                const fileRef = storageRef(storage, `memories/${Date.now()}_${imageInput.name}`);
+                const snapshot = await uploadBytes(fileRef, imageInput);
+                imageUrl = await getDownloadURL(snapshot.ref);
+            }
+
+            // صياغة الوقت والتاريخ باللغة العربية
             const now = new Date();
             const daysOfWeek = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
             const formattedDate = daysOfWeek[now.getDay()] + " - " + now.toLocaleDateString('ar-EG') + " - " + now.toLocaleTimeString('ar-EG', {hour: '2-digit', minute:'2-digit'});
 
+            // بناء كائن الذكرى الجديدة
             const newMemory = {
-                id: Date.now(),
                 text: textInput,
-                image: base64Image,
-                date: formattedDate
+                image: imageUrl,
+                date: formattedDate,
+                timestamp: Date.now()
             };
 
-            let memories = JSON.parse(localStorage.getItem('user_memories')) || [];
-            memories.unshift(newMemory);
-            localStorage.setItem('user_memories', JSON.stringify(memories));
+            // دفع البيانات لقاعدة البيانات Realtime Database
+            const dbRef = ref(database, 'memories');
+            await push(dbRef, newMemory);
 
-            alert('تم تخليد الذكرى بنجاح وحفظها في الصندوق 💖');
+            alert('تم تخليد الذكرى بنجاح وحفظها في الصندوق السحابي للكل 💖');
             
+            // تفريغ المدخلات وإغلاق المودال
             document.getElementById('memoryPassword').value = "";
             document.getElementById('memoryText').value = "";
             document.getElementById('memoryImage').value = "";
             closeModal('addMemoryModal');
-        };
 
-        if (imageInput) {
-            const reader = new FileReader();
-            reader.onloadend = function () {
-                proceedAndSave(reader.result);
-            };
-            reader.readAsDataURL(imageInput);
-        } else {
-            proceedAndSave("");
+        } catch (error) {
+            console.error("Error saving memory: ", error);
+            alert("حدث خطأ أثناء حفظ الذكرى، يرجى المحاولة مرة أخرى.");
+        } finally {
+            saveBtn.disabled = false;
+            saveBtn.innerText = "تخليد الذكرى 💖";
         }
     });
 
-    // عرض الذكريات المضافة في قائمة العرض (تم التعديل لحل مشكلة الأقواس تماماً)
-    function renderAddedMemories() {
+    // الاستماع الفوري والتلقائي للتغيرات في قاعدة البيانات وعرضها للجميع في نفس اللحظة
+    const memoriesDbRef = ref(database, 'memories');
+    onValue(memoriesDbRef, (snapshot) => {
         const container = document.getElementById('memoriesListContainer');
+        if(!container) return;
+        
         container.innerHTML = "";
-        const memories = JSON.parse(localStorage.getItem('user_memories')) || [];
+        const data = snapshot.val();
 
-        if (memories.length === 0) {
+        if (!data) {
             container.innerHTML = '<p style="text-align:center; color:rgba(255,182,193,0.6); padding:20px; font-size:0.95em;">Non ci sono ancora ricordi aggiunti.. Premi il pulsante (+) per aggiungere il vostro primo felice ricordo! 💖</p>';
             return;
         }
 
-        memories.forEach(memory => {
+        // تحويل الكائن إلى مصفوفة وترتيبها من الأحدث للأقدم
+        const memoriesList = Object.keys(data).map(key => ({
+            firebaseKey: key,
+            ...data[key]
+        })).sort((a, b) => b.timestamp - a.timestamp);
+
+        memoriesList.forEach(memory => {
             const card = document.createElement('div');
             card.className = 'added-memory-card';
             
-            let imgTag = memory.image ? '<img src="' + memory.image + '" alt="Memory" onclick="openLightbox(\'' + memory.image + '\')">' : '';
+            let imgTag = memory.image ? `<img src="${memory.image}" alt="Memory" onclick="window.openLightbox('${memory.image}')">` : '';
             
-            card.innerHTML = 
-                '<button class="delete-memory-btn" onclick="deleteMemory(' + memory.id + ')" title="Elimina Ricordo"><i class="fas fa-trash"></i></button>' +
-                imgTag +
-                '<div class="added-memory-text">' + escapeHtml(memory.text) + '</div>' +
-                '<span class="added-memory-date"><i class="far fa-clock"></i> ' + memory.date + '</span>';
+            card.innerHTML = `
+                <button class="delete-memory-btn" data-key="${memory.firebaseKey}" title="Elimina Ricordo"><i class="fas fa-trash"></i></button>
+                ${imgTag}
+                <div class="added-memory-text">${escapeHtml(memory.text)}</div>
+                <span class="added-memory-date"><i class="far fa-clock"></i> ${memory.date}</span>
+            `;
                 
             container.appendChild(card);
         });
-    }
 
-    // حذف ذكرى معينة
-    window.deleteMemory = function(id) {
+        // ربط أزرار الحذف السحابية ديناميكياً
+        const deleteButtons = container.querySelectorAll('.delete-memory-btn');
+        deleteButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const key = e.currentTarget.getAttribute('data-key');
+                deleteMemory(key);
+            });
+        });
+    });
+
+    // دالة حذف الذكرى من السحابة للكل
+    async function deleteMemory(key) {
         if (confirm('Sei sicuro di voler eliminare questo bel ricordo?')) {
-            let memories = JSON.parse(localStorage.getItem('user_memories')) || [];
-            memories = memories.filter(m => m.id !== id);
-            localStorage.setItem('user_memories', JSON.stringify(memories));
-            renderAddedMemories();
+            try {
+                const recordRef = ref(database, `memories/${key}`);
+                await remove(recordRef);
+                alert('تم حذف الذكرى بنجاح من الصندوق المشترك.');
+            } catch (error) {
+                console.error("Error deleting memory: ", error);
+                alert("لم نتمكن من حذف الذكرى، تأكد من صلاحيات الاتصال.");
+            }
         }
-    };
+    }
 
     function escapeHtml(text) {
         return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
@@ -1115,7 +1156,7 @@
     /* ===== EVENT LISTENERS & INITS ===== */
     document.addEventListener('DOMContentLoaded', () => {
         setTimeout(typeEffect, 800);
-        loadTrack(0); // تهيئة الأغنية الأولى في الخلفية
+        loadTrack(0); 
     });
 
     if(playBtn) playBtn.addEventListener('click', togglePlay);
@@ -1155,5 +1196,3 @@
         }
     }, 2500);
 </script>
-</body>
-</html>
