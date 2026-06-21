@@ -880,49 +880,34 @@ window.addEventListener('DOMContentLoaded', () => {
             setInterval(update, 1000);
         }
 
-        // ===== 7. خلفية الكلمات المتناثرة العائمة المستمرة بكل اللغات بترتيب دائري منظم =====
-
+// ===== 7. خلفية الكلمات المتناثرة العائمة المستمرة بكل اللغات بترتيب دائري منظم =====
         function initFloatingHearts() {
-
             let wordIndex = 0; // لضمان التنويع الدائم بين اللغات
 
-
-
             setInterval(() => {
-
                 const container = document.getElementById('floatsContainer');
-
-                if (container && container.children.length < 30) {
-
-                    for(let i = 0; i < 2; i++){
-
+                // رفعنا الليمت لـ 70 عشان يسمح بكثافة أعلى في الشاشة
+                if (container && container.children.length < 70) { 
+                    for(let i = 0; i < 4; i++){ // بيضخ 4 كلمات مع بعض عشان يزود الكثافة سيكا
                         const el = document.createElement('div');
-
                         el.className = 'float-item';
-
-                       
-
+                        
                         // اختيار الكلمة التالية بالترتيب الدائري لمنع تكرار نفس اللغة متتالية
-
                         el.textContent = loveWords[wordIndex % loveWords.length];
-
                         wordIndex++;
 
-                        // التوزيع العشوائي في الخلفية
-
-                        el.style.left = Math.random() * 150 + '%'; // 85% لمنع خروج الكلمات الطويلة عن حواف الشاشة
-
-                        el.style.fontSize = (Math.random() * 10 + 40) + 'px';
-
-                        el.style.animationDuration = (Math.random() * 9 + 20) + 's';
-
+                        // التوزيع العشوائي في الخلفية (نفس حساباتك الأصلية بالظبط)
+                        el.style.left = Math.random() * 150 + '%'; 
+                        el.style.fontSize = (Math.random() * 10 + 40) + 'px'; 
+                        el.style.animationDuration = (Math.random() * 9 + 20) + 's'; 
                         el.style.animationDelay = (Math.random() * 2) + 's';
-
-                       
-
+                        
                         container.appendChild(el);
-
                         el.addEventListener('animationend', () => el.remove());
+                    }
+                }
+            }, 1200); // نفس الوقت الأصلي بتاعك
+        }
 
         // ===== 8. كود مشغل الموسيقى المتكامل =====
    const playlist = [
