@@ -880,38 +880,49 @@ window.addEventListener('DOMContentLoaded', () => {
             setInterval(update, 1000);
         }
 
-// ===== 7. خلفية الكلمات المتناثرة العائمة المستمرة بكثافة عالية بترتيب دائري منظم =====
+        // ===== 7. خلفية الكلمات المتناثرة العائمة المستمرة بكل اللغات بترتيب دائري منظم =====
+
         function initFloatingHearts() {
+
             let wordIndex = 0; // لضمان التنويع الدائم بين اللغات
 
+
+
             setInterval(() => {
+
                 const container = document.getElementById('floatsContainer');
-                
-                // تم رفع الحد الأقصى لـ 65 عنصر لمنح كثافة بصرية ممتازة في الخلفية
-                if (container && container.children.length < 65) { 
-                    for(let i = 0; i < 3; i++){ // يضخ 3 كلمات في كل دورة بدلاً من 2 لزيادة الكثافة
+
+                if (container && container.children.length < 30) {
+
+                    for(let i = 0; i < 2; i++){
+
                         const el = document.createElement('div');
+
                         el.className = 'float-item';
-                        
-                        // اختيار الكلمة التالية بالترتيب الدائري مع دمج إيموجي عشوائي لمظهر أجمل
-                        const randomHeart = heartIcons[Math.floor(Math.random() * heartIcons.length)];
-                        el.textContent = `${loveWords[wordIndex % loveWords.length]} ${randomHeart}`;
+
+                       
+
+                        // اختيار الكلمة التالية بالترتيب الدائري لمنع تكرار نفس اللغة متتالية
+
+                        el.textContent = loveWords[wordIndex % loveWords.length];
+
                         wordIndex++;
 
-                        // التوزيع العشوائي المنظم في الخلفية
-                        el.style.left = (Math.random() * 85 + 5) + '%'; // توزيع متناسق بين 5% و 90% لمنع الخروج عن الحواف
-                        el.style.fontSize = (Math.random() * 12 + 22) + 'px'; // حجم خط متناسق ومريح للعين مع الكثافة
-                        el.style.animationDuration = (Math.random() * 6 + 10) + 's'; // تسريع الحركة قليلاً لتدفق مستمر
-                        el.style.animationDelay = (Math.random() * 1.5) + 's';
-                        
+                        // التوزيع العشوائي في الخلفية
+
+                        el.style.left = Math.random() * 150 + '%'; // 85% لمنع خروج الكلمات الطويلة عن حواف الشاشة
+
+                        el.style.fontSize = (Math.random() * 10 + 40) + 'px';
+
+                        el.style.animationDuration = (Math.random() * 9 + 20) + 's';
+
+                        el.style.animationDelay = (Math.random() * 2) + 's';
+
+                       
+
                         container.appendChild(el);
-                        
-                        // إزالة العناصر فوراً بمجرد انتهاء حركة الأنميشن لتوفير ذاكرة المتصفح
+
                         el.addEventListener('animationend', () => el.remove());
-                    }
-                }
-            }, 600); // تقليل الوقت لـ 600 جزء من الثانية لسرعة وتتابع الكثافة
-        }
 
         // ===== 8. كود مشغل الموسيقى المتكامل =====
    const playlist = [
