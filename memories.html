@@ -561,7 +561,7 @@
             </div>
 
              <div class="photo-card">
-                <img src="WhatsApp555.jpg" alt="ذكرى">
+                <img src="WhatsApp555.jpeg" alt="ذكرى">
                 <div class="caption-simple">نن عيوني والله بحبك❤️❤️</div>
             </div>
 
@@ -607,8 +607,8 @@
             <h3 class="modal-title">✨ إضافة ذكرى  ✨</h3>
             <form id="addMemoryForm">
                 <div class="form-group">
-                    <label>اختر صورة من التليفون:</label>
-                    <input type="file" id="memoryImgFile" class="form-control" accept="image/*" required style="padding: 8px; height: auto;">
+                    <label>رابط الصورة المباشر (URL):</label>
+                    <input type="url" id="memoryImgUrl" class="form-control" placeholder="https://example.com/image.jpg" required>
                 </div>
                 <div class="form-group">
                     <label>الوصف</label>
@@ -880,32 +880,37 @@ window.addEventListener('DOMContentLoaded', () => {
             setInterval(update, 1000);
         }
 
-// ===== 7. خلفية الكلمات المتناثرة العائمة المستمرة بكل اللغات بترتيب دائري منظم (نسخة هادئة) =====
+// ===== 7. خلفية الكلمات المتناثرة العائمة المستمرة بكثافة عالية بترتيب دائري منظم =====
         function initFloatingHearts() {
-            let wordIndex = 0; 
+            let wordIndex = 0; // لضمان التنويع الدائم بين اللغات
 
             setInterval(() => {
                 const container = document.getElementById('floatsContainer');
                 
-                // ليمت قليل جداً (15 كلمة بالكتير على الشاشة) عشان النظافة البصرية
-                if (container && container.children.length < 15) { 
-                    // بيطلع كلمة واحدة بس في الدورة عشان ميبقاش فيه زحمة
-                    const el = document.createElement('div');
-                    el.className = 'float-item';
-                    
-                    el.textContent = loveWords[wordIndex % loveWords.length];
-                    wordIndex++;
+                // تم رفع الحد الأقصى لـ 65 عنصر لمنح كثافة بصرية ممتازة في الخلفية
+                if (container && container.children.length < 65) { 
+                    for(let i = 0; i < 3; i++){ // يضخ 3 كلمات في كل دورة بدلاً من 2 لزيادة الكثافة
+                        const el = document.createElement('div');
+                        el.className = 'float-item';
+                        
+                        // اختيار الكلمة التالية بالترتيب الدائري مع دمج إيموجي عشوائي لمظهر أجمل
+                        const randomHeart = heartIcons[Math.floor(Math.random() * heartIcons.length)];
+                        el.textContent = `${loveWords[wordIndex % loveWords.length]} ${randomHeart}`;
+                        wordIndex++;
 
-                    // الحسابات الأصلية بتاعتك عشان تحافظ على شكل الحركة
-                    el.style.left = Math.random() * 150 + '%'; 
-                    el.style.fontSize = (Math.random() * 10 + 40) + 'px'; 
-                    el.style.animationDuration = (Math.random() * 9 + 20) + 's'; 
-                    el.style.animationDelay = (Math.random() * 2) + 's';
-                    
-                    container.appendChild(el);
-                    el.addEventListener('animationend', () => el.remove());
+                        // التوزيع العشوائي المنظم في الخلفية
+                        el.style.left = (Math.random() * 85 + 5) + '%'; // توزيع متناسق بين 5% و 90% لمنع الخروج عن الحواف
+                        el.style.fontSize = (Math.random() * 12 + 22) + 'px'; // حجم خط متناسق ومريح للعين مع الكثافة
+                        el.style.animationDuration = (Math.random() * 6 + 10) + 's'; // تسريع الحركة قليلاً لتدفق مستمر
+                        el.style.animationDelay = (Math.random() * 1.5) + 's';
+                        
+                        container.appendChild(el);
+                        
+                        // إزالة العناصر فوراً بمجرد انتهاء حركة الأنميشن لتوفير ذاكرة المتصفح
+                        el.addEventListener('animationend', () => el.remove());
+                    }
                 }
-            }, 2000); // تطلع كلمة جديدة كل ثانيتين (رايقة وهادية جداً)
+            }, 600); // تقليل الوقت لـ 600 جزء من الثانية لسرعة وتتابع الكثافة
         }
 
         // ===== 8. كود مشغل الموسيقى المتكامل =====
@@ -1015,136 +1020,80 @@ function formatTime(secs) {
 }
         
 
-   // ===== 9. نظام المودال والتحكم بالذكريات المضافة وعرضها وسهولة حذفها =====
+        // ===== 9. نظام المودال والتحكم بالذكريات المضافة وعرضها وسهولة حذفها =====
         const addModal = document.getElementById('addMemoryModal');
         const viewModal = document.getElementById('viewMemoriesModal');
 
-        if (document.getElementById('openAddModalBtn')) {
-            document.getElementById('openAddModalBtn').addEventListener('click', () => addModal.classList.add('open'));
-        }
-        if (document.getElementById('closeAddModalBtn')) {
-            document.getElementById('closeAddModalBtn').addEventListener('click', () => addModal.classList.remove('open'));
-        }
-        if (document.getElementById('openViewModalBtn')) {
-            document.getElementById('openViewModalBtn').addEventListener('click', () => viewModal.classList.add('open'));
-        }
-        if (document.getElementById('closeViewModalBtn')) {
-            document.getElementById('closeViewModalBtn').addEventListener('click', () => viewModal.classList.remove('open'));
-        }
+        document.getElementById('openAddModalBtn').addEventListener('click', () => addModal.classList.add('open'));
+        document.getElementById('closeAddModalBtn').addEventListener('click', () => addModal.classList.remove('open'));
+        document.getElementById('openViewModalBtn').addEventListener('click', () => viewModal.classList.add('open'));
+        document.getElementById('closeViewModalBtn').addEventListener('click', () => viewModal.classList.remove('open'));
 
         window.addEventListener('click', (e) => {
             if (e.target === addModal) addModal.classList.remove('open');
             if (e.target === viewModal) viewModal.classList.remove('open');
         });
 
-        // كود الرفع والحفظ المطور والآمن من ملفات التليفون مباشرة دون التسبب في تجميد الموقع
-        const memoryForm = document.getElementById('addMemoryForm');
-        if (memoryForm) {
-            memoryForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const fileInput = document.getElementById('memoryImgFile');
-                const cap = document.getElementById('memoryCaption').value.trim();
-                const dateVal = document.getElementById('memoryDate').value;
-                const submitBtn = this.querySelector('button[type="submit"]');
+        document.getElementById('addMemoryForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const url = document.getElementById('memoryImgUrl').value.trim();
+            const cap = document.getElementById('memoryCaption').value.trim();
+            const dateVal = document.getElementById('memoryDate').value;
 
-                if (!fileInput || !fileInput.files[0] || !cap || !dateVal) return;
+            if(!url || !cap || !dateVal) return;
 
-                // تجميد الزرار لمنع الضغط المتكرر أثناء الرفع
-                const originalBtnText = submitBtn.innerHTML;
-                submitBtn.innerHTML = 'جاري رفع الصورة... ⏳';
-                submitBtn.disabled = true;
+            const formatArr = dateVal.split('-');
+            const formattedDate = `${formatArr[2]}/${formatArr[1]}/${formatArr[0]}`;
 
-                const formData = new FormData();
-                formData.append('image', fileInput.files[0]);
+            const newMemory = { id: Date.now(), url: url, caption: cap, date: formattedDate };
 
-                // الرفع إلى سيرفر الصور المجاني المباشر لتصبح مرئية لدى الجميع
-                const apiKey = '6d207e02198a847aa98d0a2a901485a5'; 
-                fetch(`https://api.imgbb.com/1/upload?key=${apiKey}`, {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(res => res.json())
-                .then(result => {
-                    if (result.success) {
-                        const publicUrl = result.data.url;
+            let list = JSON.parse(localStorage.getItem('saved_memories')) || [];
+            list.push(newMemory);
+            localStorage.setItem('saved_memories', JSON.stringify(list));
 
-                        // تحويل صيغة التاريخ
-                        const formatArr = dateVal.split('-');
-                        const formattedDate = `${formatArr[2]}/${formatArr[1]}/${formatArr[0]}`;
-
-                        // حفظ البيانات بالرابط السحابي الجديد
-                        const newMemory = { id: Date.now(), url: publicUrl, caption: cap, date: formattedDate };
-
-                        let list = JSON.parse(localStorage.getItem('saved_memories')) || [];
-                        list.push(newMemory);
-                        localStorage.setItem('saved_memories', JSON.stringify(list));
-
-                        // إعادة تصفير الفورم وإغلاق النافذة
-                        memoryForm.reset();
-                        addModal.classList.remove('open');
-                        loadLocalMemories();
-                        alert('تم حفظ الذكرى بنجاح وأصبحت مرئية للجميع! ❤️');
-                    } else {
-                        alert('فشل رفع الصورة، جرب صورة أخرى أو تواصل مع المطور.');
-                    }
-                })
-                .catch(err => {
-                    console.error(err);
-                    alert('حدث خطأ في الشبكة أثناء الرفع، تأكد من إنترنت التليفون.');
-                })
-                .finally(() => {
-                    // إرجاع الزرار لوضعه الطبيعي بعد انتهاء العملية بالكامل
-                    submitBtn.innerHTML = originalBtnText;
-                    submitBtn.disabled = false;
-                });
-            });
-        }
+            this.reset();
+            addModal.classList.remove('open');
+            loadLocalMemories();
+        });
 
         function loadLocalMemories() {
             const list = JSON.parse(localStorage.getItem('saved_memories')) || [];
             const listContainer = document.getElementById('memoriesListContainer');
             const mainViewContainer = document.getElementById('dynamicMemoriesContainer');
 
-            if (listContainer) listContainer.innerHTML = '';
-            if (mainViewContainer) mainViewContainer.innerHTML = '';
+            listContainer.innerHTML = '';
+            mainViewContainer.innerHTML = '';
 
-            if (list.length === 0) {
-                if (listContainer) {
-                    listContainer.innerHTML = '<p style="text-align:center;color:rgba(255,182,193,0.5);font-size:0.9em;padding:20px;">لا يوجد ذكريات مضافة بعد... ابدأ بإضافة أول لحظة!</p>';
-                }
+            if(list.length === 0) {
+                listContainer.innerHTML = '<p style="text-align:center;color:rgba(255,182,193,0.5);font-size:0.9em;padding:20px;">لا يوجد ذكريات مضافة بعد... ابدأ بإضافة أول لحظة!</p>';
                 return;
             }
 
             list.forEach(item => {
-                if (listContainer) {
-                    const cardView = document.createElement('div');
-                    cardView.className = 'added-memory-card';
-                    cardView.innerHTML = `
-                        <button class="delete-memory-btn" onclick="deleteMemory(${item.id})"><i class="fa-solid fa-trash"></i></button>
-                        <img src="${item.url}" alt="Memory">
-                        <p class="added-memory-text">${item.caption}</p>
-                        <span class="added-memory-date">${item.date}</span>
-                    `;
-                    listContainer.appendChild(cardView);
-                }
+                const cardView = document.createElement('div');
+                cardView.className = 'added-memory-card';
+                cardView.innerHTML = `
+                    <button class="delete-memory-btn" onclick="deleteMemory(${item.id})"><i class="fa-solid fa-trash"></i></button>
+                    <img src="${item.url}" alt="Memory">
+                    <p class="added-memory-text">${item.caption}</p>
+                    <span class="added-memory-date">${item.date}</span>
+                `;
+                listContainer.appendChild(cardView);
 
-                if (mainViewContainer) {
-                    const mainCard = document.createElement('div');
-                    mainCard.className = 'photo-card';
-                    mainCard.setAttribute('data-caption', item.caption);
-                    mainCard.innerHTML = `
-                        <img src="${item.url}" alt="Memory Picture">
-                        <div class="caption-simple">${item.caption} ❤️ - ${item.date}</div>
-                        <div class="ripple-container"></div>
-                    `;
-                    mainViewContainer.appendChild(mainCard);
-                }
+                const mainCard = document.createElement('div');
+                mainCard.className = 'photo-card';
+                mainCard.setAttribute('data-caption', item.caption);
+                mainCard.innerHTML = `
+                    <img src="${item.url}" alt="Memory Picture">
+                    <div class="caption-simple">${item.caption} ❤️ - ${item.date}</div>
+                    <div class="ripple-container"></div>
+                `;
+                mainViewContainer.appendChild(mainCard);
             });
         }
 
         window.deleteMemory = function(id) {
-            if (confirm('هل أنت متأكد من رغبتك بحذف هذه الذكرى ؟')) {
+            if(confirm('هل أنت متأكد من رغبتك بحذف هذه الذكرى ؟')) {
                 let list = JSON.parse(localStorage.getItem('saved_memories')) || [];
                 list = list.filter(item => item.id !== id);
                 localStorage.setItem('saved_memories', JSON.stringify(list));
@@ -1152,10 +1101,9 @@ function formatTime(secs) {
             }
         };
 
-        if (document.getElementById('scrollHint')) {
-            document.getElementById('scrollHint').addEventListener('click', () => {
-                if (document.getElementById('mainContent')) {
-                    document.getElementById('mainContent').scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        }
+        document.getElementById('scrollHint').addEventListener('click', () => {
+            document.getElementById('mainContent').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
