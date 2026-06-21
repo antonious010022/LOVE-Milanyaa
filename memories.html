@@ -40,19 +40,26 @@
         .page { display: none; min-height: 100vh; }
         .page.active { display: block; }
 
-        /* FLOATING HEARTS */
+        /* FLOATING WORDS CONTAINER */
         .floats-container { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+        
+        /* تعديل ستايل العناصر العائمة لتناسب الكلمات المترجمة المنسابة في الخلفية */
         .float-item {
             position: absolute;
             bottom: -60px;
+            color: rgba(255, 182, 193, 0.28); /* لون وردي رومانسي شفاف وهادئ وخلفي */
+            font-weight: 700;
+            white-space: nowrap;
+            user-select: none;
+            pointer-events: none;
             animation: floatUp linear forwards;
-            filter: drop-shadow(0 0 8px rgba(255,182,193,0.6));
+            text-shadow: 0 0 6px rgba(255,182,193,0.2);
         }
         @keyframes floatUp {
-            0%   { transform: translateY(0) rotate(0deg) scale(0.8); opacity: 0; }
+            0%   { transform: translateY(0) rotate(-5deg) scale(0.85); opacity: 0; }
             10%  { opacity: 0.9; }
-            90%  { opacity: 0.8; }
-            100% { transform: translateY(-110vh) rotate(360deg) scale(1.1); opacity: 0; }
+            90%  { opacity: 0.9; }
+            100% { transform: translateY(-110vh) rotate(5deg) scale(1.05); opacity: 0; }
         }
 
         /* PAGE 1 */
@@ -134,9 +141,7 @@
         }
         .start-btn.show { animation: fadeInUp .8s forwards; }
         @keyframes fadeInUp { to { opacity:1; transform:translateY(0); } }
-        .start-btn:hover { transform: translateY(-8px) scale(1.05);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 40px rgba(255,182,193,0.7); background: linear-gradient(135deg, #6B1423, #800020, #6B1423);
-        }
+        .start-btn:hover { transform: translateY(-8px) scale(1.05); box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 40px rgba(255,182,193,0.7); background: linear-gradient(135deg, #6B1423, #800020, #6B1423); }
 
         /* PAGE 2 */
         .hero-section { position: relative; width: 100%; height: 100svh; overflow: hidden; }
@@ -165,7 +170,8 @@
         }
 
         .content-wrap {
-            position:relative;z-index:1; max-width:var(--max-w);margin:0 auto;
+            position:relative;z-index:1;
+            max-width:var(--max-w);margin:0 auto;
             padding:40px 16px 20px;
         }
         .page-title {
@@ -176,7 +182,8 @@
         @keyframes titlePulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.03)} }
 
         .rainbow-love {
-            display: inline-block; font-weight: 900; font-size: inherit;
+            display: inline-block;
+            font-weight: 900; font-size: inherit;
             background: linear-gradient(90deg, #FF6B9D, #FF8E53, #FFD93D, #6BCB77, #4D96FF, #C77DFF, #FF6B9D);
             background-size: 200% auto;
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
@@ -203,7 +210,8 @@
 
         .ripple-container { position:absolute;inset:0;pointer-events:none;overflow:hidden;border-radius:var(--radius); }
         .ripple {
-            position:absolute;border-radius:50%; background:rgba(255,182,193,0.25);
+            position:absolute;border-radius:50%;
+            background:rgba(255,182,193,0.25);
             transform:scale(0); animation:rippleAnim .55s ease-out forwards; pointer-events:none;
         }
         @keyframes rippleAnim { to { transform:scale(4); opacity:0; } }
@@ -223,24 +231,6 @@
             font-size:.92em;font-weight:600;text-align:center;line-height:1.5;
             background:rgba(0,0,0,0.3);
         }
-
-        .caption-card-standalone { display:flex;flex-direction:column;align-items:center;gap:10px;padding:4px 0; }
-        .caption-box-new {
-            width:100%;background:rgba(255,255,255,0.08);
-            border:1.5px solid rgba(255,182,193,0.25);border-radius:20px;
-            padding:20px 22px;box-shadow:0 4px 18px rgba(0,0,0,0.3);text-align:center;
-        }
-        .caption-text-new {
-            color:var(--pink-text);font-size:1.05em;font-weight:700;line-height:1.7;
-            display:flex;align-items:center;justify-content:center;gap:6px;
-        }
-        .caption-text-new::before { content:"❤️";font-size:.9em; }
-        .caption-pill {
-            display:flex;align-items:center;justify-content:center;gap:5px;
-            background:linear-gradient(135deg,#800020,#6B1423);border-radius:50px;
-            padding:7px 18px;box-shadow:0 4px 12px rgba(0,0,0,0.4);
-        }
-        .pill-date { color:#FFE5EC;font-size:.87em;font-weight:700;letter-spacing:1px; }
 
         /* COUNTDOWN */
         .countdown-wrapper { margin:0 0 24px; }
@@ -279,14 +269,14 @@
         }
         .lightbox.open { display:flex;animation:lbIn .25s ease; }
         @keyframes lbIn { from{opacity:0;transform:scale(.94)} to{opacity:1;transform:scale(1)} }
-        .lightbox img { max-width:100%;max-height:90svh;border-radius:12px;box-shadow:0 0 55px rgba(212,86,122,0.25);object-fit:contain;
-        }
+        .lightbox-content-wrapper { position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+        .lightbox img { max-width:100%;max-height:90svh;border-radius:12px;box-shadow:0 0 55px rgba(212,86,122,0.25);object-fit:contain; z-index: 1001; position: relative; }
         .lb-close {
             position:fixed;top:16px;right:16px;width:42px;height:42px;border-radius:50%;
             background:rgba(255,255,255,0.15);border:1.5px solid rgba(255,255,255,0.28);
             color:#fff;font-size:18px;cursor:pointer;
             display:flex;align-items:center;justify-content:center;
-            backdrop-filter:blur(8px);transition:background .2s;z-index:1000;
+            backdrop-filter:blur(8px);transition:background .2s;z-index:1002;
         }
         .lb-close:hover { background:rgba(212,86,122,0.4); }
 
@@ -306,7 +296,8 @@
 
         /* PAGE 3 — MESSAGE */
         #page3 .msg-wrap {
-            position:relative;z-index:1; max-width:var(--max-w);margin:0 auto;
+            position:relative;z-index:1;
+            max-width:var(--max-w);margin:0 auto;
             padding:50px 16px 20px; display:flex;flex-direction:column;align-items:center;
         }
         .msg-title {
@@ -315,7 +306,8 @@
             animation:titleGlow 3s infinite alternate;
         }
         .messages-container {
-            width:100%;background:rgba(255,255,255,0.1); backdrop-filter:blur(15px);border-radius:28px;
+            width:100%;background:rgba(255,255,255,0.1);
+            backdrop-filter:blur(15px);border-radius:28px;
             padding:clamp(28px,5vw,48px) clamp(20px,5vw,40px);
             box-shadow:0 20px 60px rgba(0,0,0,0.5),0 0 40px rgba(255,182,193,0.3);
             border:2px solid var(--pink-border);margin-bottom:32px;
@@ -341,26 +333,31 @@
 
         /* MUSIC PLAYER */
         .music-player {
-            position:fixed;bottom:14px;left:50%;transform:translateX(-50%);z-index:100; width:calc(100% - 28px);max-width:520px; background:rgba(74,14,14,0.9); backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px); border:1.5px solid rgba(255,182,193,0.3);border-radius:22px; padding:9px 12px 7px;box-shadow:0 8px 30px rgba(0,0,0,0.5);
+            position:fixed;bottom:14px;left:50%;transform:translateX(-50%);z-index:100;
+            width:calc(100% - 28px);max-width:520px; background:rgba(74,14,14,0.9); backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px); border:1.5px solid rgba(255,182,193,0.3);border-radius:22px; padding:9px 12px 7px;box-shadow:0 8px 30px rgba(0,0,0,0.5);
         }
         .player-inner { display:flex;align-items:center;gap:8px; }
         .disc {
-            width:36px;height:36px;min-width:36px;border-radius:50%;overflow:hidden; border:1.5px solid rgba(255,182,193,0.7);box-shadow:0 0 8px rgba(255,182,193,0.35); background:#2a0a0f;position:relative;flex-shrink:0;
+            width:36px;height:36px;min-width:36px;border-radius:50%;overflow:hidden;
+            border:1.5px solid rgba(255,182,193,0.7);box-shadow:0 0 8px rgba(255,182,193,0.35); background:#2a0a0f;position:relative;flex-shrink:0;
         }
         .disc img { width:100%;height:100%;object-fit:cover;border-radius:50%;position:absolute;inset:0;z-index:1; }
         .disc::after {
-            content:'';position:absolute;width:7px;height:7px;border-radius:50%; background:rgba(20,3,8,0.9);border:1.5px solid rgba(255,182,193,0.5); top:50%;left:50%;transform:translate(-50%,-50%);z-index:3;
+            content:'';position:absolute;width:7px;height:7px;border-radius:50%;
+            background:rgba(20,3,8,0.9);border:1.5px solid rgba(255,182,193,0.5); top:50%;left:50%;transform:translate(-50%,-50%);z-index:3;
         }
         @keyframes spinDisc { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
         .disc.spinning { animation:spinDisc 4s linear infinite; }
 
         .player-controls { display:flex;align-items:center;gap:4px;flex-shrink:0; }
         .ctrl-btn {
-            width:26px;height:26px;border-radius:50%; background:rgba(255,182,193,0.1);border:1px solid rgba(255,182,193,0.3); color:#FFE5EC;font-size:10px;cursor:pointer; display:flex;align-items:center;justify-content:center;transition:all .2s;
+            width:26px;height:26px;border-radius:50%;
+            background:rgba(255,182,193,0.1);border:1px solid rgba(255,182,193,0.3); color:#FFE5EC;font-size:10px;cursor:pointer; display:flex;align-items:center;justify-content:center;transition:all .2s;
         }
         .ctrl-btn:hover { background:rgba(212,86,122,0.1);transform:scale(1.1); }
         .play-btn {
-            width:34px;height:34px;min-width:34px;border-radius:50%; background:linear-gradient(135deg,#800020,#6B1423); border:1.5px solid rgba(255,255,255,0.5);color:#fff;font-size:12px;cursor:pointer; display:flex;align-items:center;justify-content:center; box-shadow:0 3px 10px rgba(0,0,0,0.5);transition:all .2s;flex-shrink:0;
+            width:34px;height:34px;min-width:34px;border-radius:50%;
+            background:linear-gradient(135deg,#800020,#6B1423); border:1.5px solid rgba(255,255,255,0.5);color:#fff;font-size:12px;cursor:pointer; display:flex;align-items:center;justify-content:center; box-shadow:0 3px 10px rgba(0,0,0,0.5);transition:all .2s;flex-shrink:0;
         }
         .play-btn:hover { transform:scale(1.1); }
         .play-btn:active { transform:scale(0.92); }
@@ -383,28 +380,32 @@
         .progress-fill { height:100%;background:linear-gradient(90deg,#FFB6C1,#800020);border-radius:10px;width:0%;transition:width .5s linear; }
         .time-row { display:flex;justify-content:space-between;font-size:9px;color:rgba(255,182,193,0.6);font-weight:600; }
 
-        /* الأزرار العائمة الجديدة والمودال */
+        /* الأزرار العائمة والمودال */
         .fab-add {
-            position: fixed; bottom: 20px; right: 20px; width: 55px; height: 55px;
+            position: fixed;
+            bottom: 20px; right: 20px; width: 55px; height: 55px;
             background: linear-gradient(135deg, #FF6B9D, #800020); border: 2px solid var(--pink-main);
-            border-radius: 50%; color: white; font-size: 24px; display: flex; align-items: center;
+            border-radius: 50%; color: white;
+            font-size: 24px; display: flex; align-items: center;
             justify-content: center; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.4); z-index: 200;
             transition: all 0.3s ease;
         }
         .fab-add:hover { transform: scale(1.1) rotate(90deg); }
 
         .fab-view {
-            position: fixed; bottom: 20px; left: 20px; width: 55px; height: 55px;
+            position: fixed;
+            bottom: 20px; left: 20px; width: 55px; height: 55px;
             background: linear-gradient(135deg, #6B1423, #4A0E0E); border: 2px solid var(--pink-main);
-            border-radius: 50%; color: var(--pink-main); font-size: 22px; display: flex; align-items: center;
+            border-radius: 50%; color: var(--pink-main);
+            font-size: 22px; display: flex; align-items: center;
             justify-content: center; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.4); z-index: 200;
             transition: all 0.3s ease;
         }
         .fab-view:hover { transform: scale(1.1); }
 
         .custom-modal {
-            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85);
-            z-index: 300; align-items: center; justify-content: center; padding: 20px;
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 300;
+            align-items: center; justify-content: center; padding: 20px;
             backdrop-filter: blur(8px);
         }
         .custom-modal.open { display: flex; }
@@ -418,32 +419,41 @@
         .form-group { margin-bottom: 15px; display: flex; flex-direction: column; gap: 5px; }
         .form-group label { font-size: 0.9em; color: var(--pink-light); }
         .form-control {
-            width: 100%; padding: 12px; background: rgba(255,255,255,0.1); border: 1.5px solid var(--pink-border);
+            width: 100%; padding: 12px;
+            background: rgba(255,255,255,0.1); border: 1.5px solid var(--pink-border);
             border-radius: 12px; color: white; font-family: 'Cairo', sans-serif; outline: none;
         }
         .form-control:focus { border-color: var(--pink-main); }
         .submit-btn {
             width: 100%; padding: 12px; background: linear-gradient(135deg, #800020, #6B1423);
-            border: 1px solid var(--pink-main); color: white; border-radius: 50px; font-weight: bold;
-            cursor: pointer; margin-top: 10px; transition: background 0.3s;
+            border: 1px solid var(--pink-main); color: white; border-radius: 50px;
+            font-weight: bold; cursor: pointer; margin-top: 10px; transition: background 0.3s;
         }
         .submit-btn:hover { background: #800020; }
-        
-        /* قائمة عرض الذكريات المضافة */
-        .memories-list-container {
-            max-height: 60vh; overflow-y: auto; padding-right: 5px; display: flex; flex-direction: column; gap: 15px;
-        }
-        .added-memory-card {
-            background: rgba(255,255,255,0.06); border: 1px solid var(--pink-border); border-radius: 14px; padding: 12px;
-            position: relative;
-        }
+
+        .memories-list-container { max-height: 60vh; overflow-y: auto; padding-right: 5px; display: flex; flex-direction: column; gap: 15px; }
+        .added-memory-card { background: rgba(255,255,255,0.06); border: 1px solid var(--pink-border); border-radius: 14px; padding: 12px; position: relative; }
         .added-memory-card img { width: 100%; height: auto; border-radius: 10px; margin-bottom: 8px; max-height: 200px; object-fit: cover;}
         .added-memory-text { color: var(--pink-text); font-size: 0.95em; line-height: 1.5; margin-bottom: 6px; text-align: right;}
         .added-memory-date { color: var(--pink-main); font-size: 0.75em; display: block; text-align: left; direction: ltr;}
         .delete-memory-btn {
-            position: absolute; top: 8px; right: 8px; background: rgba(255,0,0,0.6); border: none;
-            color: white; width: 25px; height: 25px; border-radius: 50%; display: flex; align-items: center;
-            justify-content: center; cursor: pointer; font-size: 12px;
+            position: absolute; top: 8px; right: 8px; background: rgba(255,0,0,0.6); border: none; color: white;
+            width: 25px; height: 25px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; font-size: 12px;
+        }
+
+        /* رسالة الحب النصية الطائرة مع Z-Index فائق ليعلو فوق اللايت بوكس */
+        .flying-love-message {
+            position: fixed; transform: translate(-50%, -50%); background: rgba(255, 182, 193, 0.95);
+            color: #ffffff; padding: 10px 18px; border-radius: 20px; font-family: 'Cairo', sans-serif;
+            font-size: 1.1rem; font-weight: bold; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            white-space: nowrap; pointer-events: none; z-index: 10005; animation: flyUpAndFade 2.2s ease-out forwards; border: 2px solid #fff;
+        }
+        @keyframes flyUpAndFade {
+            0% { opacity: 0; transform: translate(-50%, 0) scale(0.7); }
+            15% { opacity: 1; transform: translate(-50%, -40px) scale(1); }
+            85% { opacity: 1; }
+            100% { opacity: 0; transform: translate(-50%, -140px) scale(0.85); }
         }
 
         @supports (padding-bottom: env(safe-area-inset-bottom)) {
@@ -451,152 +461,61 @@
             .music-player { bottom: calc(14px + env(safe-area-inset-bottom)); }
             .fab-add, .fab-view { bottom: calc(20px + env(safe-area-inset-bottom)); }
         }
-        /* تأثير الرسالة النصية الطائرة فوق الصورة المكبرة */
-.flying-love-message {
-    position: fixed;
-    transform: translate(-50%, -50%);
-    background: rgba(255, 182, 193, 0.95); /* لون بينك ناعم */
-    color: #ffffff;
-    padding: 10px 18px;
-    border-radius: 20px;
-    font-family: 'Cairo', sans-serif;
-    font-size: 1.1rem;
-    font-weight: bold;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
-    white-space: nowrap;
-    pointer-events: none; /* لمنع حجب الضغطات التالية */
-    z-index: 10005; /* تظهر فوق كافة العناصر والطبقات */
-    animation: flyUpAndFade 2.5s ease-out forwards;
-    border: 2px solid #fff;
-}
 
-/* حركة الطيران الفريدة والاختفاء التدريجي */
-@keyframes flyUpAndFade {
-    0% {
-        opacity: 0;
-        transform: translate(-50%, 0) scale(0.7);
-    }
-    15% {
-        opacity: 1;
-        transform: translate(-50%, -40px) scale(1);
-    }
-    85% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-        transform: translate(-50%, -140px) scale(0.8);
-    }
-}
-/* تنسيقات خاصة بشاشات الموبايل والأندرويد */
-@media (max-width: 768px) {
-    /* زرار الإضافة (+) - فوق على اليمين */
-    .fab-add, #openAddModalBtn {
-        top: 30px !important;     /* مسافة مريحة من أعلى الشاشة */
-        bottom: auto !important;   /* إلغاء التثبيت السفلي القديم */
-        right: 20px !important;    /* على اليمين */
-        left: auto !important;
-    }
-
-    /* زرار عرض الذكريات (❤️) - فوق على الشمال */
-    .fab-view, #openViewModalBtn {
-        top: 30px !important;     /* نفس المسافة من فوق عشان يكونوا على خط واحد */
-        bottom: auto !important;   /* إلغاء التثبيت السفلي القديم */
-        left: 20px !important;     /* على الشمال 🌟 */
-        right: auto !important;
-    }
-} /* قفلة الميديا كويري الصحيحة بدون أقواس تالفة */
-        
+        @media (max-width: 768px) {
+            .fab-add, #openAddModalBtn { top: 30px !important; bottom: auto !important; right: 20px !important; left: auto !important; }
+            .fab-view, #openViewModalBtn { top: 30px !important; bottom: auto !important; left: 20px !important; right: auto !important; }
+        }
     </style>
 </head>
 <body>
 
-<div class="floats-container" id="floatsContainer"></div>
+    <div class="floats-container" id="floatsContainer"></div>
 
-<button class="fab-add" id="openAddModalBtn" title="Aggiungi un nuovo ricordo 💖" ><i class="fas fa-plus"></i></button>
-<button class="fab-view" id="openViewModalBtn" title="Mostra i ricordi aggiunti 👁️✨"><i class="fas fa-heart"></i></button>
-
-<div class="custom-modal" id="addMemoryModal">
-    <div class="modal-content">
-        <button class="modal-close" onclick="closeModal('addMemoryModal')"><i class="fas fa-times"></i></button>
-        <div class="modal-title">Aggiungi un nuovo ricordo 💖</div>
-        <div class="form-group">
-            <label>Password per accedere</label>
-            <input type="password" id="memoryPassword" class="form-control" placeholder="Inserisci la password">
+    <div id="page1" class="page active">
+        <div class="hanging-deco">
+            <div class="hang-item"><div class="hang-string"></div><div class="hang-ornament">💖</div></div>
+            <div class="hang-item"><div class="hang-string"></div><div class="hang-ornament">❤️</div></div>
+            <div class="hang-item"><div class="hang-string"></div><div class="hang-ornament">🌸</div></div>
+            <div class="hang-item"><div class="hang-string"></div><div class="hang-ornament">✨</div></div>
+            <div class="hang-item"><div class="hang-string"></div><div class="hang-ornament">🌹</div></div>
+            <div class="hang-item"><div class="hang-string"></div><div class="hang-ornament">💗</div></div>
+            <div class="hang-item"><div class="hang-string"></div><div class="hang-ornament">💝</div></div>
         </div>
-        <div class="form-group">
-            <label>Scrivi il testo del ricordo ✍️💖</label>
-            <textarea id="memoryText" class="form-control" rows="3" placeholder="Cosa è successo in questo giorno felice?..."></textarea>
-        </div>
-        <div class="form-group">
-            <label>Scegli una foto per il ricordo 📸✨</label>
-            <input type="file" id="memoryImage" class="form-control" accept="image/*">
-        </div>
-        <button class="submit-btn" id="saveMemoryBtn">Salva Ricordo ✨</button>
-    </div>
-</div>
-
-<div class="custom-modal" id="viewMemoriesModal">
-    <div class="modal-content">
-        <button class="modal-close" onclick="closeModal('viewMemoriesModal')"><i class="fas fa-times"></i></button>
-        <div class="modal-title">La scatola dei nostri ricordi aggiunti 🎁✨</div>
-        <div class="memories-list-container" id="memoriesListContainer">
+        <div class="container">
+            <div class="welcome-box">
+                <h1 class="fancy-title">✨ يا حلوتييي ciao ✨</h1>
+                <div class="romantic-text" id="typewriterText"></div>
+                <button class="start-btn" id="startBtn">Sei pronto?💖</button>
             </div>
-    </div>
-</div>
-
-<div class="page active" id="page1">
-    <div class="hanging-deco">
-        <div class="hang-item"><div class="hang-string"></div><div class="hang-ornament">❤️</div></div>
-        <div class="hang-item"><div class="hang-string"></div><div class="hang-ornament">💖</div></div>
-        <div class="hang-item"><div class="hang-string"></div><div class="hang-ornament">✨</div></div>
-        <div class="hang-item"><div class="hang-string"></div><div class="hang-ornament">💕</div></div>
-        <div class="hang-item"><div class="hang-string"></div><div class="hang-ornament">💗</div></div>
-        <div class="hang-item"><div class="hang-string"></div><div class="hang-ornament">🌸</div></div>
-        <div class="hang-item"><div class="hang-string"></div><div class="hang-ornament">🌹</div></div>
-    </div>
-    <div class="container">
-        <div class="welcome-box">
-            <h1 class="fancy-title">يا حلوتييي ciao</h1>
-            <div class="romantic-text" id="typewriterText"></div>
-            <button class="start-btn" id="startBtn">Sei pronto? </button>
         </div>
     </div>
-</div>
 
-<div class="page" id="page2">
-    <div class="hero-section" id="heroSec">
-        <img src="IMG-20260329-WA0064.jpg" alt="Hero">
-        <div class="hero-overlay"></div>
-        <div class="hero-badge">OUR UNIVERSE</div>
-        <div class="scroll-hint" id="scrollHint"><i class="fas fa-chevron-down"></i></div>
-    </div>
+    <div id="page2" class="page">
+        <div class="hero-section" id="heroSection">
+            <img src="IMG-20260329-WA0064.jpg" alt="Hero Picture">
+            <div class="hero-overlay"></div>
+            <div class="hero-badge">OUR UNIVERSE</div>
+            <div class="scroll-hint" id="scrollHint"><i class="fa-solid fa-chevron-down"></i></div>
+        </div>
 
-    <div class="content-wrap" id="mainContent">
-        <h2 class="page-title"><span class="rainbow-love">Il nostro inizio💞</span></h2>
-        
-        <div class="countdown-wrapper">
-            <div class="countdown-card">
-                <div class="countdown-title"💖Il primo giorno in cui ci siamo incontrati ❤️✨ 2025-12-21 💖></div>
-                <div class="countdown-grid">
-                    <div class="countdown-box"><span class="countdown-number" id="days">00</span><span class="countdown-label">أيام</span></div>
-                    <div class="countdown-box"><span class="countdown-number" id="hours">00</span><span class="countdown-label">ساعات</span></div>
-                    <div class="countdown-box"><span class="countdown-number" id="minutes">00</span><span class="countdown-label">دقائق</span></div>
-                    <div class="countdown-box"><span class="countdown-number" id="seconds">00</span><span class="countdown-label">ثواني</span></div>
+        <div class="content-wrap" id="mainContent">
+            <h2 class="page-title"><span class="rainbow-love">Il nostro inizio💞</span></h2>
+
+            <div class="countdown-wrapper">
+                <div class="countdown-card">
+                    <div class="countdown-title">كل ثانية بتعدي وانتِ في قلبي و بتبقي الدنيا مش سيعاني والله طيب تعرفي اننا مهما حصل العداد دا هيفضل شغال من اول يوم اتقابلنا فيه حتي ولو مر علينا 100 سنة ومحدش بقي عايش الموقع دا هيفضل بيعد وعارف ان بجد بحبك قوي اي حاجه بعدلها او بعملها في بجد بلف حولين نفسي في كل تعديله بس حاسس ان حاجه بحب اعبر بيها عن حبي ليكي اللي بجد ميتوصفش ومالهوش نهاية كل الناس هتتكب ليهم نهايه بس حتي لما يحصل ومنبقاش موجودين  عيال عيال عيالنا هيدخلو يعرفو جدو كان بيحب تيتتهم ازاي 💗💗💗💗🫂🫂😂</div>
+                    <div class="countdown-grid">
+                        <div class="countdown-box"><span class="countdown-number" id="days">00</span><span class="countdown-label">أيام</span></div>
+                        <div class="countdown-box"><span class="countdown-number" id="hours">00</span><span class="countdown-label">ساعات</span></div>
+                        <div class="countdown-box"><span class="countdown-number" id="minutes">00</span><span class="countdown-label">دقائق</span></div>
+                        <div class="countdown-box"><span class="countdown-number" id="seconds">00</span><span class="countdown-label">ثواني</span></div>
+                    </div>
+                    <div class="countdown-sub" id="exactCounter">Il giorno cui ti ho detto ti amo 💗💗💗💗</div>
                 </div>
-                <div class="countdown-sub">كل ثانية بتعدي وانتِ في قلبي ❤️</div>
             </div>
-        </div>
-            <div class="caption-card-standalone">
-                <div class="caption-box-new">
-                    <div class="caption-text-new">Il giorno cui ti ho detto ti amo 💗💗💗💗 </div>
-                </div>
-                <div class="caption-pill"><span class="pill-date">2026 / 1 / 21</span></div>
-            </div>
-<div class="photos-stack">
-            
 
-            <div class="photo-card">
+             <div class="photo-card">
                 <img src="IMG-20260329-WA0065.PNG" alt="ذكرى">
                 <div class="caption-simple">اجمل ما رأته عيناي والله❤️</div>
             </div>
@@ -641,568 +560,550 @@
                 <div class="caption-simple">la mia principessa❤️❤️❤️❤️❤️ طبعااااااااااا</div>
             </div>
 
-        </div>
+             <div class="photo-card">
+                <img src="WhatsApp555.jpeg" alt="ذكرى">
+                <div class="caption-simple">نن عيوني والله بحبك❤️❤️</div>
+            </div>
 
+            <div id="dynamicMemoriesContainer" class="photos-stack" style="margin-top: 24px;"></div>
 
-        <div class="final-cta">
-            <p class="cta-text" style="color:var(--pink-main)">💕 Ti amo  💕</p>
-            <button class="next-btn" id="toPage3Btn">Il messaggio ✉️💌</button>
+            <div class="final-cta">
+                <p class="cta-text" style="color:var(--pink-text)">💕 Ti amo 💕✨</p>
+                <button class="next-btn" id="toPage3Btn">Il messaggio✉️💌</button>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="page" id="page3">
-    <div class="msg-wrap">
-        <h2 class="msg-title"> Il messaggio che non si dice mai abbastanza </h2>
+    <div id="page3" class="page">
+        <div class="msg-wrap">
+            <h2 class="msg-title">💌 messaggios</h2>
         <div class="messages-container">
             <div class="message">بحبك اوي وشكرًا انك ديمًأ جنبي وبتشجعيني علي اي شئ حتي لو تافه بجد و بجد انا حياتي بعد منك اتعيرت للاحسن ب360 درجه واللي في قلبي ليكي كتير جدا </div>
             <div class="message">حقك عليا اخر مره بجد لو كنت ضايقت لما خبطتك غصب عني بس والله ما اقصد خالص و رزعي براحتك يا حبيبي 🙈🙈🙈</div>
             <div class="message">حقك عليا لو ضايقتك يوم او في اي وقت بدون قصد 😘</div>
-            <div class="msg-footer">Ti amo con tutto il mio cuore,Sei la mia principessa, e sarai sempre lo stesso per me👸💗💗.</div>
+            <div class="message">Ti amo con tutto il mio cuore,Sei la mia principessa, e sarai sempre lo stesso per me👸💗💗.</div>
             <div class="message">Ti amo infinitamente 💕😘😘😘</div>
+            <div class="message">حبي ليكي بيزيد كل يوم عن اللي قبلة و دا شئ مكنتش اتخيله عموما بس اكيد لانك انتي اللي جنبي علشان كدا انا بيزيد حبي ليكي كل يوم جوايا حاجات بجد انا مش قارد اعبر عنها بس بجد بحبك و يارب تفضلي طول العمر جنبي علطول  </div>
 
         </div>
-        <button class="next-btn" id="backBtn"><i class="fas fa-arrow-right" style="margin-left:8px"></i>🔂Ricordi🔂</button>
+            <button class="next-btn" id="backBtn">🔂Ricordi🔂</button>
+            <div class="msg-footer">انسي الخوف انا قلبي مواعدك</div>
+        </div>
     </div>
-</div>
 
-<div class="lightbox" id="lightbox">
-    <button class="lb-close" id="lbClose"><i class="fas fa-times"></i></button>
-    <img id="lbImg" src="" alt="Zoomed">
-</div>
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content-wrapper" id="lightboxContentWrapper">
+            <button class="lb-close" id="lbClose"><i class="fa-solid fa-xmark"></i></button>
+            <img id="lbImg" src="" alt="Zoomed">
+        </div>
+    </div>
 
-<div class="music-player">
-    <div class="player-inner">
-        <div class="disc spinning" id="musicDisc">
-            <img src="2222.jpg" alt="Disc">
-        </div>
-        <div class="player-controls">
-            <button class="ctrl-btn" id="prevBtn"><i class="fas fa-backward"></i></button>
-            <button class="play-btn" id="playBtn"><i class="fas fa-pause"></i></button>
-            <button class="ctrl-btn" id="nextBtn"><i class="fas fa-forward"></i></button>
-        </div>
-        <div class="player-info">
-            <div class="player-top">
-                <span class="song-name" id="songName">جاري تحميل اللحن... ✨</span>
-                <span class="song-num" id="songNum">1 / 12</span>
-                <div class="sound-wave playing" id="soundWave">
-                    <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    <button class="fab-add" id="openAddModalBtn" title="إضافة ذكرى جديدة"><i class="fa-solid fa-plus"></i></button>
+    <button class="fab-view" id="openViewModalBtn" title="عرض الذكريات "><i class="fa-solid fa-heart"></i></button>
+
+<div class="custom-modal" id="addMemoryModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeAddModalBtn"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="modal-title">✨ إضافة ذكرى  ✨</h3>
+            <form id="addMemoryForm">
+                <div class="form-group">
+                    <label>رابط الصورة المباشر (URL):</label>
+                    <input type="url" id="memoryImgUrl" class="form-control" placeholder="https://example.com/image.jpg" required>
                 </div>
-            </div>
-            <div class="progress-bar" id="progressBar">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
-            <div class="time-row">
-                <span id="currTime">0:00</span>
-                <span id="totalTime">0:00</span>
-            </div>
+                <div class="form-group">
+                    <label>الوصف</label>
+                    <input type="text" id="memoryCaption" class="form-control" placeholder="اكتب كلمتك  ..." required>
+                </div>
+                <div class="form-group">
+                    <label>التاريخ:</label>
+                    <input type="date" id="memoryDate" class="form-control" required>
+                </div>
+                <button type="submit" class="submit-btn">حفظ الذكرى  ❤️</button>
+            </form>
         </div>
     </div>
-</div>
 
-<audio id="mainAudio"></audio>
-    
-<script type="module">
-    /* ===== استيراد مكتبات Firebase المطلوبة (قاعدة البيانات فقط) ===== */
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+<div class="custom-modal" id="viewMemoriesModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeViewModalBtn"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="modal-title">La scatola dei nostri ricordi aggiunti 🎁✨</h3>
+            <div class="memories-list-container" id="memoriesListContainer">
+                </div>
+        </div>
+    </div>
 
-    /* ===== إعدادات حساب Firebase الخاص بك ===== */
-    const firebaseConfig = {
-        apiKey: "AIzaSyDRxqNWUp9ZDqdEuJhMPWozM3do6iBvlqc",
-        authDomain: "cccxv-8dd75.firebaseapp.com",
-        projectId: "cccxv-8dd75",
-        storageBucket: "cccxv-8dd75.firebasestorage.app",
-        messagingSenderId: "109672810332",
-        appId: "1:109672810332:web:27c33da88182ff4a7de399",
-        measurementId: "G-92Q5M090ZP",
-        databaseURL: "https://cccxv-8dd75-default-rtdb.europe-west1.firebasedatabase.app" // سيرفر بلجيكا السريع 🌟
-    };
+    <div class="music-player">
+        <div class="player-inner">
+            <div class="disc" id="musicDisc">
+                <img src="2222.jpg" alt="Disc">
+            </div>
+            <div class="player-controls">
+                <button class="ctrl-btn" id="prevBtn"><i class="fa-solid fa-backward"></i></button>
+                <button class="play-btn" id="playBtn"><i class="fa-solid fa-play"></i></button>
+                <button class="ctrl-btn" id="nextBtn"><i class="fa-solid fa-forward"></i></button>
+            </div>
+            <div class="player-info">
+                <div class="player-top">
+                    <span class="song-name" id="songName">جاري تحميل الاغنية... ✨</span>
+                    <span class="song-num" id="songNum">0/0</span>
+                </div>
+                <div class="progress-bar" id="progressBar"><div class="progress-fill" id="progressFill"></div></div>
+                <div class="time-row"><span id="currTime">0:00</span><span id="totalTime">0:00</span></div>
+            </div>
+            <div class="sound-wave" id="soundWave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        </div>
+    </div>
 
-    // تهيئة وتفعيل Firebase
-    const app = initializeApp(firebaseConfig);
-    const database = getDatabase(app);
-
-    /* ===== البيانات الثابتة والتهيئة للتايب رايتر والعداد الحسابي ===== */
-    const textLines = [
-        "احب اوضح اكتر من شئ بجد و هي اني بحب اقعد معاكي وبحب القعده معاكي والهكش والنكش اللي بنعمله دا و زي ما قولت قبل كدا بجد كل ما بشوفك بحس بلفهه وبحس بشغف وبيزيد تقريبًا مع الوقت وبحس اني مبسوط جدا جدا وانا معاكي وربنا يخليكي ليا يا نور عيوني والله امواهههه  يا أحلى من رأته عيوني..",
-        "والله أنا كل يوم بحس إنك بقتي جزء مهم جدًا من حياتيي بحب أسمع صوتك يوميا واتعودت اني اسمعه و بحب أشوف ابتسامتك وبحب اي احساس بيجيلي لما بنكون مع بعض إحساس اني مبسوط وبجد اللهفه الغير طبيبعيه لسه موجوده معرفش ازاييي أنتي ",
-        "بتخلي أيامي أحلى وأجمل وبجد بقيت الشخص  بفكر فيه طول الوقت تلقائيي ربنا يديمك في حياتي ويخليكي ليا ديما يا رب لحد ما نوصل 200 سنهههه بحبك أوي أوي 💗💗💗💗💗💗💗💗😘 😘"
-    ];
-    const startDate = new Date("2025-12-21T17:20:00"); 
-    const originalPass = "milanyaa&tonaa";
-
-    /* ===== نظام مشغل الموسيقى المتطور لـ 12 أغنية ===== */
-  const playlist = [
-            { name: "عودوني - عمرو دياب 🎵", src: "https://archive.org/download/erda-bil-nasib/Awedony.mp3" },
-            { name: "لما صحيت -  وردة 🌸", src: "https://archive.org/download/kalam-ennas/Lama_Saheet.mp3" },
-            { name: "قلبي  -  عمرو دياب & الشاب خالد ", src: "https://archive.org/download/erda-bil-nasib/Alby.mp3" },
-            { name: "إلا هي - عمرو دياب ✨", src: "https://archive.org/download/erda-bil-nasib/Ella_Heya.mp3" },
-            { name: "إرضى بالنصيب - جورج وسوف 🎙️", src: "https://archive.org/download/erda-bil-nasib/Erda_bil_Nasib.mp3" },
-            { name: "جيمس دين  -  أمير عيد 🎻", src: "https://archive.org/download/erda-bil-nasib/gyms_dyn.mp3" },
-            { name: "هو إنت مين - أنغام ❤️", src: "https://archive.org/download/erda-bil-nasib/hw_ant_myn.mp3" },
-            { name: "كلام الناس - جورج وسوف 🎶", src: "https://archive.org/download/kalam-ennas/Kalam_Ennas.mp3" },
-            { name: "مش حبيبي بس - أنغام  💕", src: "https://archive.org/download/kalam-ennas/msh_hbyby_bs.mp3" },
-            { name: "نفسي أحبك - وسط البلد 💗", src: "https://archive.org/download/kalam-ennas/nfsy_ahbk.mp3" },
-            { name: "يوم وليلة - وردة  🌹", src: "https://archive.org/download/kalam-ennas/%D9%8A%D9%88%D9%85+%D9%88%D9%84%D9%8A%D9%84%D9%87.mp3" },
-            { name: "أمتي الزمان -  محمد عبد الوهاب 🎹", src: "https://archive.org/download/erda-bil-nasib/Amte_Al-zman.mp3" },
-            { name: " Ed Sheeran - Perfect 🔮", src: "https://archive.org/download/erda-bil-nasib/cNGjD0VG4R8.mp3" }
+    <script>
+        // ===== 1. مصفوفة الكلمات بمختلف اللغات والمحافظة على الإيموجيز =====
+        const loveWords = [
+            'بحبك',          // العربية
+            'I love you',    // الإنجليزية
+            'Je t\'aime',    // الفرنسية
+            'Te amo',        // الإسبانية
+            'Ti amo',        // الإيطالية
+            'Ich liebe dich',// الألمانية
+            'Seni seviyorum',// التركية
+            'Я тебя люблю',  // الروسية
+            '사랑해',        // الكورية
+            '愛してる',       // اليابانية
+            '我爱你'         // الصينية
         ];
-
-    let currentTrackIdx = 0;
-    const audioEl = document.getElementById('mainAudio');
-    const playBtn = document.getElementById('playBtn');
-    const musicDisc = document.getElementById('musicDisc');
-    const soundWave = document.getElementById('soundWave');
-    const songNameText = document.getElementById('songName');
-    const songNumText = document.getElementById('songNum');
-    const progressFill = document.getElementById('progressFill');
-    const progressBar = document.getElementById('progressBar');
-    const currTimeText = document.getElementById('currTime');
-    const totalTimeText = document.getElementById('totalTime');
-
-    function loadTrack(idx) {
-        if(idx < 0) idx = playlist.length - 1;
-        if(idx >= playlist.length) idx = 0;
-        currentTrackIdx = idx;
-
-        if (audioEl) {
-            audioEl.src = playlist[currentTrackIdx].src;
-            if (songNameText) songNameText.textContent = playlist[currentTrackIdx].name;
-            if (songNumText) songNumText.textContent = (currentTrackIdx + 1) + " / " + playlist.length;
-            if (progressFill) progressFill.style.width = '0%';
-            if (currTimeText) currTimeText.textContent = "0:00";
-            if (totalTimeText) totalTimeText.textContent = "0:00";
-        }
-    }
-
-    function togglePlay() {
-        if (!audioEl) return;
-        if (audioEl.paused) {
-            audioEl.play().then(() => {
-                if (playBtn) playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                if (musicDisc) musicDisc.classList.add('spinning');
-                if (soundWave) soundWave.classList.add('playing');
-            }).catch(err => console.log("في انتظار تفاعل المستخدم لتشغيل الصوت تلقائياً."));
-        } else {
-            audioEl.focus();
-            audioEl.pause();
-            if (playBtn) playBtn.innerHTML = '<i class="fas fa-play"></i>';
-            if (musicDisc) musicDisc.classList.remove('spinning');
-            if (soundWave) soundWave.classList.remove('playing');
-        }
-    }
-
-    function nextTrack() {
-        loadTrack(currentTrackIdx + 1);
-        if (audioEl) {
-            audioEl.play().then(() => {
-                if (playBtn) playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                if (musicDisc) musicDisc.classList.add('spinning');
-                if (soundWave) soundWave.classList.add('playing');
-            });
-        }
-    }
-
-    function prevTrack() {
-        loadTrack(currentTrackIdx - 1);
-        if (audioEl) {
-            audioEl.play().then(() => {
-                if (playBtn) playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                if (musicDisc) musicDisc.classList.add('spinning');
-                if (soundWave) soundWave.classList.add('playing');
-            });
-        }
-    }
-
-    function formatTime(secs) {
-        if (isNaN(secs)) return "0:00";
-        const m = Math.floor(secs / 60);
-        const s = Math.floor(secs % 60);
-        return m + ":" + (s < 10 ? '0' : '') + s;
-    }
-
-    if (audioEl) {
-        audioEl.addEventListener('timeupdate', () => {
-            if (audioEl.duration) {
-                const pct = (audioEl.currentTime / audioEl.duration) * 100;
-                if (progressFill) progressFill.style.width = pct + '%';
-                if (currTimeText) currTimeText.textContent = formatTime(audioEl.currentTime);
-                if (totalTimeText) totalTimeText.textContent = formatTime(audioEl.duration);
-            }
-        });
-        audioEl.addEventListener('ended', nextTrack);
-    }
-
-    if (progressBar) {
-        progressBar.addEventListener('click', (e) => {
-            const rect = progressBar.getBoundingClientRect();
-            const pct = (e.clientX - rect.left) / rect.width;
-            if (audioEl && audioEl.duration) {
-                audioEl.currentTime = pct * audioEl.duration;
-            }
-        });
-    }
-
-    /* ===== NAVIGATION & TYPEWRITER ===== */
-    function goToPage2(){
-        document.getElementById('page1').classList.remove('active');
-        document.getElementById('page2').classList.add('active');
-        window.scrollTo(0,0);
-        initCountdown();
         
-        setTimeout(() => {
-            if (audioEl && audioEl.paused) togglePlay();
-        }, 300);
-    }
+        const heartIcons = ['❤️','💗','💕','💖','😘','💓','💞'];
 
-    function goToPage3(){
-        document.getElementById('page2').classList.remove('active');
-        document.getElementById('page3').classList.add('active');
-        window.scrollTo(0,0);
-        
-        const msgs = document.querySelectorAll('#page3 .message');
-        msgs.forEach((m, idx) => {
-            setTimeout(() => { m.classList.add('show'); }, idx * 450);
-        });
-    }
+        // مؤشر تتبع الكلمات لمنع التكرار وجعلها تظهر بترتيب منظم ومستمر
+        let clickWordCounter = 0;
 
-    function backToMemories(){
-        document.getElementById('page3').classList.remove('active');
-        document.getElementById('page2').classList.add('active');
-        window.scrollTo(0,0);
-    }
+        // ===== 2. نظام التنقل والتحكم بزر الرجوع للهاتف (History API) =====
+        function navigateTo(pageId, triggerPush = true) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.remove('active');
+                targetPage.classList.add('active');
+                window.scrollTo({ top: 0 });
+                
+                if (triggerPush) {
+                    history.pushState({ pageId: pageId }, '', `?page=${pageId}`);
+                }
 
-    let lineIdx = 0, charIdx = 0;
-    const dest = document.getElementById("typewriterText");
-    function typeEffect(){
-        if(lineIdx < textLines.length){
-            if(charIdx === 0) {
-                dest.innerHTML += (lineIdx > 0 ? "<br><br>" : "") + "";
+                if (pageId === 'page1') {
+                    startTypewriter();
+                } else if (pageId === 'page3') {
+                    animateMessages();
+                }
             }
-            let currentLine = textLines[lineIdx];
-            if (currentLine.substr(charIdx, 1) === "<") {
-                let tagLength = currentLine.substr(charIdx).indexOf(">") + 1;
-                dest.innerHTML += currentLine.substr(charIdx, tagLength);
-                charIdx += tagLength;
+        }
+
+        window.addEventListener('popstate', function(event) {
+            if (event.state && event.state.pageId) {
+                navigateTo(event.state.pageId, false);
             } else {
-                dest.innerHTML += currentLine.substr(charIdx, 1);
-                charIdx++;
+                navigateTo('page1', false);
             }
+        });
+
+window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const initialPage = urlParams.get('page') || 'page1';
             
-            if(charIdx < currentLine.length){
-                setTimeout(typeEffect, window.innerWidth < 500 ? 35 : 45);
-            } else {
-                lineIdx++; charIdx = 0;
-                setTimeout(typeEffect, 600);
-            }
-        } else {
-            setTimeout(() => {
-                const btn = document.getElementById('startBtn');
-                if(btn) btn.classList.add('show');
-            }, 300);
+            history.replaceState({ pageId: initialPage }, '', `?page=${initialPage}`);
+            navigateTo(initialPage, false);
+
+            // الكود الإضافي رقم 1: للاستماع لزرار الباك الخاص بالمتصفح عند التنقل بين الصفحات الداخلية المخصصة (Page1, Page2)
+            window.addEventListener('popstate', (event) => {
+                if (event.state && event.state.pageId) {
+                    navigateTo(event.state.pageId, false);
+                }
+            });
+
+            // الكود الإضافي رقم 2: لتنظيف الذاكرة وإيقاف الصوت فوراً لو رجعنا بالمتصفح للصفحة الأولى تماماً لمنع الصفحة البيضاء
+            window.addEventListener('pagehide', () => {
+                if (typeof audio !== 'undefined') {
+                    audio.pause();
+                    audio.src = '';
+                }
+            });
+
+            initFloatingHearts();
+            initCountdown();
+            initMusicPlayer();
+            loadLocalMemories();
+        });
+        
+        document.getElementById('startBtn').addEventListener('click', () => navigateTo('page2'));
+        document.getElementById('toPage3Btn').addEventListener('click', () => navigateTo('page3'));
+        document.getElementById('backBtn').addEventListener('click', () => navigateTo('page2'));
+
+        // ===== 3. تأثير الكلمات الطائرة التفاعلية المحدثة لمنع التكرار وتشغيلها باللايت بوكس =====
+        function createFlyingLoveMsg(clientX, clientY) {
+            // جلب الكلمة بالترتيب المتتالي عبر المصفوفة لضمان التنويع الكامل
+            const currentText = loveWords[clickWordCounter % loveWords.length];
+            const randomHeart = heartIcons[Math.floor(Math.random() * heartIcons.length)];
+            clickWordCounter++; // زيادة العداد للضغطة التالية
+            
+            const el = document.createElement('div');
+            el.className = 'flying-love-message';
+            el.textContent = `${randomHeart} ${currentText} ${randomHeart}`;
+            
+            el.style.left = (clientX || window.innerWidth / 2) + 'px';
+            el.style.top = (clientY || window.innerHeight / 2) + 'px';
+            
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 2200);
         }
-    }
 
-    /* ===== COUNTDOWN TIMER ===== */
-    let timerInterval;
-    function initCountdown(){
-        if(timerInterval) clearInterval(timerInterval);
-        function update(){
-            const now = new Date();
-            const diff = now - startDate;
-            if(diff < 0) return;
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-            const mins = Math.floor((diff / (1000 * 60)) % 60);
-            const secs = Math.floor((diff / 1000) % 60);
-            document.getElementById('days').textContent = String(days).padStart(2, '0');
-            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-            document.getElementById('minutes').textContent = String(mins).padStart(2, '0');
-            document.getElementById('seconds').textContent = String(secs).padStart(2, '0');
-        }
-        update();
-        timerInterval = setInterval(update, 1000);
-    }
-
-    /* ===== LIGHTBOX FUNCTIONALITY ===== */
-    let lightboxClickCount = 0; 
-
-    window.openLightbox = function(src){
-        const lb = document.getElementById('lightbox');
-        const lbImg = document.getElementById('lbImg');
-        lbImg.src = src;
-        lb.classList.add('open');
-        document.body.style.overflow = 'hidden';
-        lightboxClickCount = 0; 
-    }
-    
-    document.getElementById('lbClose').addEventListener('click', ()=>{
-        document.getElementById('lightbox').classList.remove('open');
-        document.body.style.overflow = '';
-    });
-
-    const lbImgContainer = document.getElementById('lbImg');
-    if (lbImgContainer) {
-        lbImgContainer.addEventListener('click', (e) => {
-            e.stopPropagation(); 
-
-            const lightboxEl = document.getElementById('lightbox');
-            const mouseX = e.clientX;
-            const mouseY = e.clientY;
-
-            lightboxClickCount++;
-
-            for(let i=0; i<6; i++){
-                const heart = document.createElement('div');
-                heart.className = 'heart-burst';
-                heart.textContent = ['😘','😘','😘','😘','😘','😘'][Math.floor(Math.random()*6)];
+        // معالجة النقر واللمس لتوليد التأثيرات
+        function handleInteraction(e, targetCard) {
+            const rect = targetCard.getBoundingClientRect();
+            const rippleContainer = targetCard.querySelector('.ripple-container') || targetCard;
+            
+            const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+            const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+            
+            if (clientX && clientY) {
+                const x = clientX - rect.left;
+                const y = clientY - rect.top;
                 
-                heart.style.position = 'fixed';
-                heart.style.left = (mouseX + (Math.random()*40 - 20)) + 'px';
-                heart.style.top = (mouseY + (Math.random()*40 - 20)) + 'px';
-                heart.style.zIndex = '10000';
+                // أنيميشن الريبل السلس
+                const rip = document.createElement('div');
+                rip.className = 'ripple';
+                rip.style.left = x + 'px';
+                rip.style.top = y + 'px';
+                rippleContainer.appendChild(rip);
+                setTimeout(() => rip.remove(), 600);
                 
-                lightboxEl.appendChild(heart);
-                setTimeout(() => heart.remove(), 700);
+                // أنيميشن تفجير القلب المصاحب
+                const burst = document.createElement('div');
+                burst.className = 'heart-burst';
+                burst.textContent = heartIcons[Math.floor(Math.random() * heartIcons.length)];
+                burst.style.left = x + 'px';
+                burst.style.top = y + 'px';
+                targetCard.appendChild(burst);
+                setTimeout(() => burst.remove(), 700);
+
+                // إطلاق الكلمة الطائرة المترجمة بالترتيب الصحيح
+                createFlyingLoveMsg(clientX, clientY);
             }
+        }
 
-            if (lightboxClickCount % 5 === 0) {
-                const loveMessages = [
-                    "مش كفايههه بوس ؟؟ 😂😂😘",
-                    " بوسي يا حلوهه بوسي 😘😘",
-                    "هععععع بحبككك يا بت والله اموااااااههههه 😘😘😘",
-                    "بوسه تاني بقي  🙈🙈🙈 ",
-                    "اخر بوسه خلاص 😂😂😂😘😘😘 ",
-                ];
-                
-                const randomMessage = loveMessages[Math.floor(Math.random() * loveMessages.length)];
-                const flyingText = document.createElement('div');
-                flyingText.className = 'flying-love-message';
-                flyingText.textContent = randomMessage;
-                flyingText.style.left = mouseX + 'px';
-                flyingText.style.top = mouseY + 'px';
-                lightboxEl.appendChild(flyingText);
-                
-                setTimeout(() => { flyingText.remove(); }, 3500);
+        // الاستماع للنقرات العامة للبطاقات وللـ Lightbox كذلك
+        document.addEventListener('click', (e) => {
+            const card = e.target.closest('.photo-card');
+            const lightboxWrapper = e.target.closest('#lightboxContentWrapper');
+            
+            if (card) {
+                handleInteraction(e, card);
+                const img = card.querySelector('img');
+                if (img && !e.target.classList.contains('delete-memory-btn')) {
+                    setTimeout(() => {
+                        document.getElementById('lbImg').src = img.src;
+                        document.getElementById('lightbox').classList.add('open');
+                    }, 150);
+                }
+            } else if (lightboxWrapper && !e.target.closest('#lbClose')) {
+                // تفعيل الميزة حتى أثناء فتح الصورة وتكبيرها داخل اللايت بوكس
+                createFlyingLoveMsg(e.clientX, e.clientY);
             }
         });
-    }
 
-    function tapCard(e, card){
-        const rippleCont = document.createElement('div');
-        rippleCont.className = 'ripple-container';
-        const ripple = document.createElement('div');
-        ripple.className = 'ripple';
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        ripple.style.left = x + 'px';
-        ripple.style.top = y + 'px';
-        rippleCont.appendChild(ripple);
-        card.appendChild(rippleCont);
-        setTimeout(() => rippleCont.remove(), 600);
+        document.getElementById('lbClose').addEventListener('click', () => {
+            document.getElementById('lightbox').classList.remove('open');
+        });
+        document.getElementById('lightbox').addEventListener('click', (e) => {
+            if (e.target.id === 'lightbox') document.getElementById('lightbox').classList.remove('open');
+        });
 
-        for(let i=0; i<6; i++){
-            const heart = document.createElement('div');
-            heart.className = 'heart-burst';
-            heart.textContent = ['😘','😘','😘','😘','😘','😘'][Math.floor(Math.random()*6)];
-            heart.style.left = (x + (Math.random()*40 - 20)) + 'px';
-            heart.style.top = (y + (Math.random()*40 - 20)) + 'px';
-            card.appendChild(heart);
-            setTimeout(() => heart.remove(), 700);
+        // ===== 4. آلة الكتابة الآلية (Typewriter) =====
+        const romanticPara = "احب اوضح اكتر من شئ بجد و هي اني بحب اقعد معاكي وبحب القعده معاكي والهكش والنكش اللي بنعمله دا و زي ما قولت قبل كدا بجد كل ما بشوفك بحس بلفهه وبحس بشغف وبيزيد تقريبًا مع الوقت وبحس اني مبسوط جدا جدا وانا معاكي وربنا يخليكي ليا يا نور عيوني والله امواهههه يا أحلى من رأته عيوني.. والله أنا كل يوم بحس إنك بقتي جزء مهم جدًا من حياتيي بحب أسمع صوتك يوميا واتعودت اني اسمعه و بحب أشوف ابتسامتك وبحب اي احساس بيجيلي لما بنكون مع بعض إحساس اني مبسوط وبجد اللهفه الغير طبيبعيه لسه موجوده معرفش ازاييي أنتي بتخلي أيامي أحلى وأجمل وبجد بقيت الشخص بفكر فيه طول الوقت تلقائيي ربنا يديمك في حياتي ويخليكي ليا ديما يا رب لحد ما نوصل 200 سنهههه بحبك أوي أوي 💗💗💗💗💗💗💗💗😘 😘";
+        let twIndex = 0;
+        let twStarted = false;
+
+        function startTypewriter() {
+            if (twStarted) return;
+            twStarted = true;
+            twIndex = 0;
+            const container = document.getElementById('typewriterText');
+            container.innerHTML = '';
+            
+            function type() {
+                if (twIndex < romanticPara.length) {
+                    container.innerHTML = romanticPara.substring(0, twIndex + 1) + '<span class="cursor"></span>';
+                    twIndex++;
+                    setTimeout(type, 65);
+                } else {
+                    const cursor = container.querySelector('.cursor');
+                    if (cursor) cursor.style.animation = 'blink 0.8s infinite';
+                    document.getElementById('startBtn').classList.add('show');
+                }
+            }
+            type();
         }
 
-        const img = card.querySelector('img');
-        if(img) setTimeout(() => openLightbox(img.src), 250);
-    }
+        // ===== 5. تأثير ظهور رسائل الصفحة الثالثة المجدول =====
+        function animateMessages() {
+            const msgs = document.querySelectorAll('#page3 .message');
+            msgs.forEach((m, idx) => {
+                m.classList.remove('show');
+                setTimeout(() => {
+                    m.classList.add('show');
+                }, idx * 600);
+            });
+        }
 
-    /* ===== إدارة المودال والذكريات المضافة السحابية المحدثة لتعمل مجاناً ===== */
-    function openModal(id) {
-        document.getElementById(id).classList.add('open');
-    }
-    function closeModal(id) {
-        document.getElementById(id).classList.remove('open');
-    }
+        // ===== 6. كود العداد الزمني التنازلي التراكمي المستمر =====
+        const startDateStr = "2025-08-30T00:00:00"; 
+        function initCountdown() {
+            const startTimestamp = new Date(startDateStr).getTime();
+            
+            function update() {
+                const now = Date.now();
+                const diff = now - startTimestamp;
+                if (diff < 0) return;
+                
+                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                const m = Math.floor((diff / (1000 * 60)) % 60);
+                const s = Math.floor((diff / 1000) % 60);
+                
+                document.getElementById('days').textContent = String(d).padStart(2, '0');
+                document.getElementById('hours').textContent = String(h).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(m).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(s).padStart(2, '0');
+                
+                const totalWeeks = (diff / (1000 * 60 * 60 * 24 * 7)).toFixed(1);
+                const totalMonths = (diff / (1000 * 60 * 60 * 24 * 30.4375)).toFixed(1);
+                
+            }
+            update();
+            setInterval(update, 1000);
+        }
 
-    document.getElementById('openAddModalBtn').addEventListener('click', () => openModal('addMemoryModal'));
-    document.getElementById('openViewModalBtn').addEventListener('click', () => openModal('viewMemoriesModal'));
+// ===== 7. خلفية الكلمات المتناثرة العائمة المستمرة بكثافة عالية بترتيب دائري منظم =====
+        function initFloatingHearts() {
+            let wordIndex = 0; // لضمان التنويع الدائم بين اللغات
+
+            setInterval(() => {
+                const container = document.getElementById('floatsContainer');
+                
+                // تم رفع الحد الأقصى لـ 65 عنصر لمنح كثافة بصرية ممتازة في الخلفية
+                if (container && container.children.length < 65) { 
+                    for(let i = 0; i < 3; i++){ // يضخ 3 كلمات في كل دورة بدلاً من 2 لزيادة الكثافة
+                        const el = document.createElement('div');
+                        el.className = 'float-item';
+                        
+                        // اختيار الكلمة التالية بالترتيب الدائري مع دمج إيموجي عشوائي لمظهر أجمل
+                        const randomHeart = heartIcons[Math.floor(Math.random() * heartIcons.length)];
+                        el.textContent = `${loveWords[wordIndex % loveWords.length]} ${randomHeart}`;
+                        wordIndex++;
+
+                        // التوزيع العشوائي المنظم في الخلفية
+                        el.style.left = (Math.random() * 85 + 5) + '%'; // توزيع متناسق بين 5% و 90% لمنع الخروج عن الحواف
+                        el.style.fontSize = (Math.random() * 12 + 22) + 'px'; // حجم خط متناسق ومريح للعين مع الكثافة
+                        el.style.animationDuration = (Math.random() * 6 + 10) + 's'; // تسريع الحركة قليلاً لتدفق مستمر
+                        el.style.animationDelay = (Math.random() * 1.5) + 's';
+                        
+                        container.appendChild(el);
+                        
+                        // إزالة العناصر فوراً بمجرد انتهاء حركة الأنميشن لتوفير ذاكرة المتصفح
+                        el.addEventListener('animationend', () => el.remove());
+                    }
+                }
+            }, 600); // تقليل الوقت لـ 600 جزء من الثانية لسرعة وتتابع الكثافة
+        }
+
+        // ===== 8. كود مشغل الموسيقى المتكامل =====
+   const playlist = [
+    { name: "عودوني - عمرو دياب 🎵", src: "https://archive.org/download/erda-bil-nasib/Awedony.mp3" },
+    { name: "لما صحيت -  وردة 🌸", src: "https://archive.org/download/kalam-ennas/Lama_Saheet.mp3" },
+    { name: "قلبي  -  عمرو دياب & الشاب خالد ", src: "https://archive.org/download/erda-bil-nasib/Alby.mp3" },
+    { name: "إلا هي - عمرو دياب ✨", src: "https://archive.org/download/erda-bil-nasib/Ella_Heya.mp3" },
+    { name: "إرضى بالنصيب - جورج وسوف 🎙️", src: "https://archive.org/download/erda-bil-nasib/Erda_bil_Nasib.mp3" },
+    { name: "جيمس دين  -  أمير عيد 🎻", src: "https://archive.org/download/erda-bil-nasib/gyms_dyn.mp3" },
+    { name: "هو إنت مين - أنغام ❤️", src: "https://archive.org/download/erda-bil-nasib/hw_ant_myn.mp3" },
+    { name: "كلام الناس - جورج وسوف 🎶", src: "https://archive.org/download/kalam-ennas/Kalam_Ennas.mp3" },
+    { name: "مش حبيبي بس - أنغام  💕", src: "https://archive.org/download/kalam-ennas/msh_hbyby_bs.mp3" },
+    { name: "نفسي أحبك - وسط البلد 💗", src: "https://archive.org/download/kalam-ennas/nfsy_ahbk.mp3" },
+    { name: "يوم وليلة - وردة  🌹", src: "https://archive.org/download/kalam-ennas/%D9%8A%D9%88%D9%85+%D9%88%D9%84%D9%8A%D9%84%D9%87.mp3" },
+    { name: "أمتي الزمان -  محمد عبد الوهاب 🎹", src: "https://archive.org/download/erda-bil-nasib/Amte_Al-zman.mp3" },
+    { name: " Ed Sheeran - Perfect 🔮", src: "https://archive.org/download/erda-bil-nasib/cNGjD0VG4R8.mp3" },
+    { name: " نانسي عجرم  - ya-salam 🔮", src: "https://archive.org/download/1222_20260621/Ya_Salam.mp3" },
+    { name: " عمرو دياب  - Ya_Kinzy ", src: "https://archive.org/download/1222_20260621/Ya_Kinzy.mp3" },
+    { name: " يزن حيفاوي - وينك من زمان ", src: "https://archive.org/download/1222_20260621/Yazan%20Haifawi%20-%20Wainek%20Min%20Zaman.mp3" } ,
+];
+
+let currentSongIdx = 0;
+let audio = new Audio();
+let isPlaying = false;
+
+function initMusicPlayer() {
+    if(playlist.length === 0) return;
+    loadSong(currentSongIdx);
     
-    const closeButtons = document.querySelectorAll('.modal-close, [id^="close"]');
-    closeButtons.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const modal = e.target.closest('.modal') || e.target.closest('[id$="Modal"]');
-            if(modal) closeModal(modal.id);
-        });
+    const playBtn = document.getElementById('playBtn');
+    playBtn.addEventListener('click', () => {
+        if(isPlaying) pauseTrack(); else playTrack();
     });
 
-    // دالة حفظ الذكرى بنظام الـ Base64 المجاني والسريع سحابياً
-    document.getElementById('saveMemoryBtn').addEventListener('click', () => {
-        const passwordInput = document.getElementById('memoryPassword').value;
-        const textInput = document.getElementById('memoryText').value;
-        const imageInput = document.getElementById('memoryImage').files[0];
-        const saveBtn = document.getElementById('saveMemoryBtn');
+    document.getElementById('nextBtn').addEventListener('click', nextTrack);
+    document.getElementById('prevBtn').addEventListener('click', prevTrack);
+    
+    audio.addEventListener('timeupdate', () => {
+        if(!audio.duration) return;
+        const pct = (audio.currentTime / audio.duration) * 100;
+        document.getElementById('progressFill').style.width = pct + '%';
+        document.getElementById('currTime').textContent = formatTime(audio.currentTime);
+    });
 
-        if (passwordInput !== originalPass) {
-            alert('عذراً، كلمة المرور خاطئة! لا يمكن إضافة ذكرى بدون الصلاحية ❤️');
-            return;
+    audio.addEventListener('loadedmetadata', () => {
+        document.getElementById('totalTime').textContent = formatTime(audio.duration);
+    });
+
+    audio.addEventListener('ended', nextTrack);
+
+    document.getElementById('progressBar').addEventListener('click', (e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const width = rect.width;
+        if(audio.duration) {
+            audio.currentTime = (clickX / width) * audio.duration;
         }
-        if (!textInput.trim()) {
-            alert('اكتب نصاً عن الذكرى.');
-            return;
+    });
+}
+
+function loadSong(idx) {
+    currentSongIdx = idx;
+    audio.src = playlist[idx].src; // تم تعديلها من url إلى src هنا ✅
+    document.getElementById('songName').textContent = playlist[idx].name;
+    document.getElementById('songNum').textContent = `${idx + 1}/${playlist.length}`;
+    document.getElementById('progressFill').style.width = '0%';
+    document.getElementById('currTime').textContent = "0:00";
+}
+
+function playTrack() {
+    audio.play().then(() => {
+        isPlaying = true;
+        document.getElementById('playBtn').innerHTML = '<i class="fa-solid fa-pause"></i>';
+        document.getElementById('musicDisc').classList.add('spinning');
+        document.getElementById('soundWave').classList.add('playing');
+    }).catch(e => console.log("Music play blocked:", e));
+}
+
+function pauseTrack() {
+    audio.pause();
+    isPlaying = false;
+    document.getElementById('playBtn').innerHTML = '<i class="fa-solid fa-play"></i>';
+    document.getElementById('musicDisc').classList.remove('spinning');
+    document.getElementById('soundWave').classList.remove('playing');
+}
+
+function nextTrack() {
+    let next = currentSongIdx + 1;
+    if(next >= playlist.length) next = 0;
+    loadSong(next);
+    if(isPlaying) playTrack();
+}
+
+function prevTrack() {
+    let prev = currentSongIdx - 1;
+    if(prev < 0) prev = playlist.length - 1;
+    loadSong(prev);
+    if(isPlaying) playTrack();
+}
+
+function formatTime(secs) {
+    if(isNaN(secs)) return "0:00";
+    const m = Math.floor(secs / 60);
+    const s = Math.floor(secs % 60);
+    return `${m}:${String(s).padStart(2, '0')}`;
+}
+        
+
+        // ===== 9. نظام المودال والتحكم بالذكريات المضافة وعرضها وسهولة حذفها =====
+        const addModal = document.getElementById('addMemoryModal');
+        const viewModal = document.getElementById('viewMemoriesModal');
+
+        document.getElementById('openAddModalBtn').addEventListener('click', () => addModal.classList.add('open'));
+        document.getElementById('closeAddModalBtn').addEventListener('click', () => addModal.classList.remove('open'));
+        document.getElementById('openViewModalBtn').addEventListener('click', () => viewModal.classList.add('open'));
+        document.getElementById('closeViewModalBtn').addEventListener('click', () => viewModal.classList.remove('open'));
+
+        window.addEventListener('click', (e) => {
+            if (e.target === addModal) addModal.classList.remove('open');
+            if (e.target === viewModal) viewModal.classList.remove('open');
+        });
+
+        document.getElementById('addMemoryForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const url = document.getElementById('memoryImgUrl').value.trim();
+            const cap = document.getElementById('memoryCaption').value.trim();
+            const dateVal = document.getElementById('memoryDate').value;
+
+            if(!url || !cap || !dateVal) return;
+
+            const formatArr = dateVal.split('-');
+            const formattedDate = `${formatArr[2]}/${formatArr[1]}/${formatArr[0]}`;
+
+            const newMemory = { id: Date.now(), url: url, caption: cap, date: formattedDate };
+
+            let list = JSON.parse(localStorage.getItem('saved_memories')) || [];
+            list.push(newMemory);
+            localStorage.setItem('saved_memories', JSON.stringify(list));
+
+            this.reset();
+            addModal.classList.remove('open');
+            loadLocalMemories();
+        });
+
+        function loadLocalMemories() {
+            const list = JSON.parse(localStorage.getItem('saved_memories')) || [];
+            const listContainer = document.getElementById('memoriesListContainer');
+            const mainViewContainer = document.getElementById('dynamicMemoriesContainer');
+
+            listContainer.innerHTML = '';
+            mainViewContainer.innerHTML = '';
+
+            if(list.length === 0) {
+                listContainer.innerHTML = '<p style="text-align:center;color:rgba(255,182,193,0.5);font-size:0.9em;padding:20px;">لا يوجد ذكريات مضافة بعد... ابدأ بإضافة أول لحظة!</p>';
+                return;
+            }
+
+            list.forEach(item => {
+                const cardView = document.createElement('div');
+                cardView.className = 'added-memory-card';
+                cardView.innerHTML = `
+                    <button class="delete-memory-btn" onclick="deleteMemory(${item.id})"><i class="fa-solid fa-trash"></i></button>
+                    <img src="${item.url}" alt="Memory">
+                    <p class="added-memory-text">${item.caption}</p>
+                    <span class="added-memory-date">${item.date}</span>
+                `;
+                listContainer.appendChild(cardView);
+
+                const mainCard = document.createElement('div');
+                mainCard.className = 'photo-card';
+                mainCard.setAttribute('data-caption', item.caption);
+                mainCard.innerHTML = `
+                    <img src="${item.url}" alt="Memory Picture">
+                    <div class="caption-simple">${item.caption} ❤️ - ${item.date}</div>
+                    <div class="ripple-container"></div>
+                `;
+                mainViewContainer.appendChild(mainCard);
+            });
         }
 
-        saveBtn.disabled = true;
-        saveBtn.innerText = "جاري الحفظ والرفع سحابياً... ⏳";
-
-        const sendToFirebase = (base64String = "") => {
-            const now = new Date();
-            const daysOfWeek = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
-            const formattedDate = daysOfWeek[now.getDay()] + " - " + now.toLocaleDateString('ar-EG') + " - " + now.toLocaleTimeString('ar-EG', {hour: '2-digit', minute:'2-digit'});
-
-            const newMemory = {
-                text: textInput,
-                image: base64String, // الصورة يتم حفظها كـ كود مشفر مجاناً ومباشرة في الداتابيز
-                date: formattedDate,
-                timestamp: Date.now()
-            };
-
-            const dbRef = ref(database, 'memories');
-            push(dbRef, newMemory)
-                .then(() => {
-                    alert('تم تخليد الذكرى بنجاح وحفظها في الصندوق السحابي للكل 💖');
-                    document.getElementById('memoryPassword').value = "";
-                    document.getElementById('memoryText').value = "";
-                    document.getElementById('memoryImage').value = "";
-                    closeModal('addMemoryModal');
-                })
-                .catch((err) => {
-                    console.error("Error: ", err);
-                    alert("حدث خطأ أثناء الاتصال بالداتابيز.");
-                })
-                .finally(() => {
-                    saveBtn.disabled = false;
-                    saveBtn.innerText = "تخليد الذكرى 💖";
-                });
+        window.deleteMemory = function(id) {
+            if(confirm('هل أنت متأكد من رغبتك بحذف هذه الذكرى ؟')) {
+                let list = JSON.parse(localStorage.getItem('saved_memories')) || [];
+                list = list.filter(item => item.id !== id);
+                localStorage.setItem('saved_memories', JSON.stringify(list));
+                loadLocalMemories();
+            }
         };
 
-        // معالجة وتحويل الصورة مجاناً وبدون الحاجة لـ Storage
-        if (imageInput) {
-            const reader = new FileReader();
-            reader.onloadend = function () {
-                sendToFirebase(reader.result);
-            };
-            reader.onerror = function() {
-                alert("مشكلة في قراءة ملف الصورة.");
-                saveBtn.disabled = false;
-                saveBtn.innerText = "تخليد الذكرى 💖";
-            };
-            reader.readAsDataURL(imageInput);
-        } else {
-            sendToFirebase("");
-        }
-    });
-
-    // الاستماع الفوري والتلقائي ليعمل بالكامل للكل
-    const memoriesDbRef = ref(database, 'memories');
-    onValue(memoriesDbRef, (snapshot) => {
-        const container = document.getElementById('memoriesListContainer');
-        if(!container) return;
-        
-        container.innerHTML = "";
-        const data = snapshot.val();
-
-        if (!data) {
-            container.innerHTML = '<p style="text-align:center; color:rgba(255,182,193,0.6); padding:20px; font-size:0.95em;">Non ci sono ancora ricordi aggiunti.. Premi il pulsante (+) per aggiungere il vostro primo felice ricordo! 💖</p>';
-            return;
-        }
-
-        const memoriesList = Object.keys(data).map(key => ({
-            firebaseKey: key,
-            ...data[key]
-        })).sort((a, b) => b.timestamp - a.timestamp);
-
-        memoriesList.forEach(memory => {
-            const card = document.createElement('div');
-            card.className = 'added-memory-card';
-            
-            let imgTag = memory.image ? `<img src="${memory.image}" alt="Memory" onclick="window.openLightbox('${memory.image}')">` : '';
-            
-            card.innerHTML = `
-                <button class="delete-memory-btn" data-key="${memory.firebaseKey}" title="Elimina Ricordo"><i class="fas fa-trash"></i></button>
-                ${imgTag}
-                <div class="added-memory-text">${escapeHtml(memory.text)}</div>
-                <span class="added-memory-date"><i class="far fa-clock"></i> ${memory.date}</span>
-            `;
-                
-            container.appendChild(card);
+        document.getElementById('scrollHint').addEventListener('click', () => {
+            document.getElementById('mainContent').scrollIntoView({ behavior: 'smooth' });
         });
-
-        const deleteButtons = container.querySelectorAll('.delete-memory-btn');
-        deleteButtons.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const key = e.currentTarget.getAttribute('data-key');
-                deleteMemory(key);
-            });
-        });
-    });
-
-    async function deleteMemory(key) {
-        if (confirm('Sei sicuro di voler eliminare questo bel ricordo?')) {
-            try {
-                const recordRef = ref(database, `memories/${key}`);
-                await remove(recordRef);
-                alert('تم حذف الذكرى بنجاح من الصندوق المشترك.');
-            } catch (error) {
-                console.error("Error deleting memory: ", error);
-                alert("لم نتمكن من حذف الذكرى، تأكد من صلاحيات الاتصال.");
-            }
-        }
-    }
-
-    function escapeHtml(text) {
-        return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
-    }
-
-    /* ===== EVENT LISTENERS & INITS ===== */
-    document.addEventListener('DOMContentLoaded', () => {
-        setTimeout(typeEffect, 800);
-        loadTrack(0); 
-    });
-
-    if(playBtn) playBtn.addEventListener('click', togglePlay);
-    if(document.getElementById('nextBtn')) document.getElementById('nextBtn').addEventListener('click', nextTrack);
-    if(document.getElementById('prevBtn')) document.getElementById('prevBtn').addEventListener('click', prevTrack);
-
-    if(document.getElementById('startBtn')) document.getElementById('startBtn').addEventListener('click', goToPage2);
-    if(document.getElementById('toPage3Btn')) document.getElementById('toPage3Btn').addEventListener('click', goToPage3);
-    if(document.getElementById('backBtn')) document.getElementById('backBtn').addEventListener('click', backToMemories);
-    
-    const scrollHint = document.getElementById('scrollHint');
-    if(scrollHint) scrollHint.addEventListener('click', ()=>{
-        document.getElementById('mainContent').scrollIntoView({behavior:'smooth'});
-    });
-
-    document.addEventListener('click', (e)=>{
-        const card = e.target.closest('.photo-card');
-        if(card) tapCard(e, card);
-    });
-
-    const heartIcons = ['❤️', '💗', '❤️', '💕', '😘', '💞'];
-    setInterval(()=>{
-        const container = document.getElementById('floatsContainer');
-        if (container && container.children.length < 25) { 
-            for(let i=0; i<2; i++){
-                const el = document.createElement('div');
-                el.className = 'float-item';
-                el.textContent = heartIcons[Math.floor(Math.random()*heartIcons.length)];
-                el.style.left = Math.random()*100+'%';
-                el.style.fontSize = (Math.random()*14+26)+'px';
-                el.style.animationDuration = (Math.random()*5+8)+'s';
-                el.style.animationDelay = (Math.random()*.8)+'s';
-                container.appendChild(el);
-                setTimeout(() => el.remove(), 13000);
-            }
-        }
-    }, 2500);
-</script>
+    </script>
+</body>
+</html>
