@@ -41,6 +41,8 @@
             opacity: 0;
             animation: floatUp 14s infinite ease-in-out;
             filter: drop-shadow(0 0 15px rgba(255,182,193,0.8));
+            white-space: nowrap;
+            color: #FFE5EC; 
         }
         @keyframes floatUp {
             0%   { transform: translateY(0) rotate(0deg) scale(0.5); opacity: 0; }
@@ -50,46 +52,24 @@
             100% { transform: translateY(-110vh) rotate(20deg) scale(1.2); opacity: 0; }
         }
 
-        /* HEART CONTAINER */
-        .heart-container {
+        /* LOGIN BOX CONTAINER */
+        .login-container {
             position: relative;
-            width: 650px;
-            height: 600px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .big-heart {
-            position: absolute;
+            z-index: 3;
             width: 100%;
-            height: 100%;
-            font-size: 550px;
-            animation: heartBeat 2.5s infinite;
-            filter: drop-shadow(0 0 15px rgba(0,0,0,0.9)) drop-shadow(0 15px 35px rgba(0,0,0,0.8));
-        }
-        .big-heart::before {
-            content: "❤️";
-            background: linear-gradient(135deg, #C41E3A 0%, #B91C30 25%, #A01828 50%, #B91C30 75%, #C41E3A 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        @keyframes heartBeat {
-            0%, 100% { transform: scale(1); }
-            10%, 30% { transform: scale(1.05); }
-            20%, 40% { transform: scale(1); }
+            max-width: 450px;
+            margin: 0 auto;
         }
 
-        /* CONTENT INSIDE HEART */
+        /* CONTENT INSIDE BOX */
         .login-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 65%;
-    z-index: 3;
-    padding: 30px 25px;
-    text-align: center;
+            padding: 30px 25px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 182, 193, 0.1);
+            border-radius: 24px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
         }
 
         .photo-circle-wrap {
@@ -143,13 +123,6 @@
         }
 
         .input-group { margin-bottom: 16px; }
-        .input-group label {
-            display: block;
-            margin-bottom: 7px;
-            color: #FFE5EC;
-            font-weight: 700;
-            text-align: right;
-        }
         .input-group input {
             width: 80%;
             padding: 12px 15px;
@@ -188,16 +161,12 @@
         }
 
         @media (max-width: 768px) {
-            .heart-container { width: 400px; height: 400px; }
-            .big-heart { font-size: 350px; }
-            .login-content { width: 75%; }
+            .login-container { max-width: 380px; }
             .photo-circle { width: 80px; height: 80px; }
             .login-title { font-size: 1.5em; }
         }
         @media (max-width: 480px) {
-            .heart-container { width: 320px; height: 320px; }
-            .big-heart { font-size: 280px; }
-            .login-content { width: 80%; }
+            .login-container { max-width: 310px; }
         }
     </style>
 </head>
@@ -206,30 +175,27 @@
     <div class="floats-container" id="floatsContainer"></div>
 
     <div class="login-container">
-        <div class="heart-container">
-            
-            <div class="login-content">
-                <div class="photo-circle-wrap">
-                    <div class="photo-circle">
-                        <img src="IMG-20260329-WA0064.jpg" alt="photo">
-                    </div>
+        <div class="login-content">
+            <div class="photo-circle-wrap">
+                <div class="photo-circle">
+                    <img src="IMG-20260329-WA0064.jpg" alt="photo">
                 </div>
-                
-                <h1 class="login-title">هعععععععع 😘😘😘😘😘😘 </h1>
-                <p class="login-subtitle">my everything ❤</p>
-                
-                <div class="input-group">
-                    <input type="" id="password" placeholder= "الباسورد 🙈 " autocomplete="off">
-                </div>
-                
-                <button id="unlockBtn" class="login-btn">💕 Unlock 💕</button>
-                
-                <div id="errorMsg" class="error-msg"></div>
             </div>
+            
+            <h1 class="login-title">هعععععععع 😘😘😘😘😘😘 </h1>
+            <p class="login-subtitle">my everything ❤</p>
+            
+            <div class="input-group">
+                <input type="password" id="password" placeholder="الباسورد 🙈" autocomplete="off">
+            </div>
+            
+            <button id="unlockBtn" class="login-btn">💕 Unlock 💕</button>
+            
+            <div id="errorMsg" class="error-msg"></div>
         </div>
     </div>
 
-<script>
+    <script>
         // ==================== إعدادات الأمان والباسورد ====================
         const correctPassword = "love you tona";
 
@@ -238,18 +204,38 @@
         const errorMsg = document.getElementById('errorMsg');
         const loginContainer = document.querySelector('.login-container');
 
-        // ===== 1. نظام القلوب العائمة المستمرة في الخلفية =====
+        // ===== 1. مصفوفة الكلمات بمختلف اللغات والمحافظة على الإيموجيز =====
+        const loveWords = [
+            'بحبك',          // العربية
+            'I love you',    // الإنجليزية
+            'Je t\'aime',    // الفرنسية
+            'Te amo',        // الإسبانية
+            'Ti amo',        // الإيطالية
+            'Ich liebe dich',// الألمانية
+            'Seni seviyorum',// التركية
+            'Я тебя люблю',  // الروسية
+            '사랑해',        // الكورية
+            '愛してる',       // اليابانية
+            '我爱你'         // الصينية
+        ];
+        
         const heartIcons = ['❤️','💗','💕','💖','😘','💓','💞'];
+
+        // ===== دالة توليد العناصر العائمة =====
         function createFloatingHeart() {
             const container = document.getElementById('floatsContainer');
             if(!container) return;
             
             const el = document.createElement('div');
             el.className = 'float-item';
-            el.textContent = heartIcons[Math.floor(Math.random() * heartIcons.length)];
-            el.style.left = Math.random() * 100 + '%';
-            el.style.fontSize = (26 + Math.random() * 14) + 'px';
-            el.style.animationDuration = (8 + Math.random() * 6) + 's';
+            
+            const randomWord = loveWords[Math.floor(Math.random() * loveWords.length)];
+            const randomHeart = heartIcons[Math.floor(Math.random() * heartIcons.length)];
+            el.textContent = `${randomWord} ${randomHeart}`;
+            
+            el.style.left = Math.random() * 90 + '%'; 
+            el.style.fontSize = (18 + Math.random() * 10) + 'px'; 
+            el.style.animationDuration = (10 + Math.random() * 6) + 's';
             el.style.animationDelay = Math.random() * 1.5 + 's';
             container.appendChild(el);
             
@@ -258,61 +244,63 @@
 
         setInterval(() => {
             for (let i = 0; i < 2; i++) { createFloatingHeart(); }
-        }, 800);
+        }, 1200);
 
-        // ===== 2. نظام انفجار القلوب التفاعلي عند الضغط الفردي أو الخطأ =====
+        // ===== 2. نظام انفجار القلوب =====
         function triggerTapExplosion(x, y) {
             for(let i=0; i<6; i++) {
                 const heart = document.createElement('div');
                 heart.className = 'heart-burst';
-                heart.textContent = ['❤️','💖','💕','💗','😘','💞'][Math.floor(Math.random()*6)];
+                heart.textContent = heartIcons[Math.floor(Math.random()*heartIcons.length)];
+                heart.style.position = 'fixed';
+                heart.style.zIndex = '9999';
+                heart.style.pointerEvents = 'none';
                 
-                // حساب اتجاهات عشوائية دائرية متناسقة للانفجار
                 const angle = Math.random() * Math.PI * 2;
                 const distance = 30 + Math.random() * 50;
-                heart.style.setProperty('--x', Math.cos(angle) * distance + 'px');
-                heart.style.setProperty('--y', Math.sin(angle) * distance + 'px');
-                heart.style.setProperty('--r', (Math.random() * 720 - 360) + 'deg');
                 
                 heart.style.left = x + 'px';
                 heart.style.top = y + 'px';
+                
+                heart.animate([
+                    { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+                    { transform: `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px) scale(0)`, opacity: 0 }
+                ], {
+                    duration: 700,
+                    easing: 'ease-out'
+                });
                 
                 document.body.appendChild(heart);
                 setTimeout(() => heart.remove(), 700);
             }
         }
 
-        // التقاط حدث الضغط على كامل الشاشة لعمل التأثير التفاعلي المبهج
         document.addEventListener('click', (e) => {
-            // تجاهل التأثير إذا ضغط المستخدم داخل حقل الكتابة لتسهيل الإدخال
-            if(e.target === passwordInput) return;
+            if(e.target === passwordInput || e.target === unlockBtn) return;
             triggerTapExplosion(e.clientX, e.clientY);
         });
 
-        // ===== 3. فحص الصلاحية والدخول لصفحة الذكريات (تم التعديل للفتح في نفس الصفحة) =====
+        // ===== 3. فحص الصلاحية والدخول في نفس التاب =====
         function unlockHeart() {
             const enteredPass = passwordInput.value.trim();
 
             if (enteredPass === correctPassword) {
                 errorMsg.style.display = 'none';
                 
-                // تأثير أنيميشن رائع للخروج والاختفاء التدريجي الموحد
                 loginContainer.style.transition = 'all 1.2s cubic-bezier(0.6, -0.28, 0.735, 0.045)';
                 loginContainer.style.opacity = '0';
                 loginContainer.style.transform = 'scale(0.5) rotate(-10deg)';
 
                 setTimeout(() => {
-                    // التوجيه المباشر في نفس الصفحة الحالية بسلاسة وبدون تبويب جديد
+                    // يفتح في نفس الصفحة تماماً وبدون تابات جديدة
                     window.location.href = "memories.html"; 
                 }, 1200);
             } else {
-                // التعامل الذكي مع كلمة المرور الخاطئة (اهتزاز + إنذار)
                 errorMsg.textContent = "الباسورد غلط يا قلبي 😔 جرب تاني";
                 errorMsg.style.display = 'block';
                 passwordInput.value = '';
                 passwordInput.focus();
 
-                // إطلاق تأثير اهتزاز القلب الكبير المطور
                 loginContainer.style.transition = 'transform 80ms ease';
                 loginContainer.style.transform = 'translateX(12px)';
                 setTimeout(() => loginContainer.style.transform = 'translateX(-12px)', 80);
@@ -322,15 +310,25 @@
             }
         }
 
-        // تشغيل الأحداث والتحقق
         unlockBtn.addEventListener('click', unlockHeart);
         passwordInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') { unlockHeart(); }
         });
 
-        // تهيئة تشغيل أولى للقلوب العائمة فور التحميل
         document.addEventListener('DOMContentLoaded', () => {
             for (let i = 0; i < 4; i++) { createFloatingHeart(); }
+        });
+
+        // ===== 4. حل مشكلة الصفحة البيضاء عند الرجوع بزرار المتصفح (Back) =====
+        window.addEventListener('pageshow', function (event) {
+            // إعادة تصفير الأبعاد وتفريغ خانة كلمة السر لتكون الصفحة جاهزة مجدداً
+            if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+                loginContainer.style.transition = 'none';
+                loginContainer.style.opacity = '1';
+                loginContainer.style.transform = 'scale(1) rotate(0deg)';
+                passwordInput.value = '';
+                errorMsg.style.display = 'none';
+            }
         });
     </script>
 </body>
